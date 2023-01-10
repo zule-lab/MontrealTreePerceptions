@@ -27,12 +27,12 @@ restore()
 targets_input <- c(
   
   tar_file_read(mtl_eng_raw,
-           "input/survey/UrbanForestCommunitySurvey_Montreal_ENG_July-11-2022.csv",
+           "input/survey/UrbanForestCommunitySurvey_Montreal_ENG_corrected.csv",
            read.csv(file = !!.x, skip = 1)),
   
   tar_file_read(mtl_fre_raw,
-           "input/survey/UrbanForestCommunitySurvey_Montreal_FRE_July-11-2022.csv",
-           read.csv(file = !!.x)),
+           "input/survey/UrbanForestCommunitySurvey_Montreal_FRE_corrected.csv",
+           read.csv(file = !!.x, skip = 1)),
   
   tar_target(
     mtl_eng_clean,
