@@ -126,14 +126,25 @@ clean_mtl_eng <- function(mtl_eng_raw){
            postcode_choice = what_is_your_postcode_selected_choice,
            postcode_other = what_is_your_postcode_please_type_either_the_first_3_digits_or_the_full_6_digits_text)
   
-  # remove undesirable response types
+  
   mtl_eng_filt <- mtl_eng_rcols %>%
+    # remove undesirable response types
     filter(finished == "True",
            eighteen == "Yes",
-           municipality != ("Dorval" | "Blainville" | "Oka"),
+           !municipality %in% c("Dorval", "Blainville", "Oka", "None of the above/ other"), # dummy cities,
            response_type != "Spam",
-           
-           )
+           !if_all(importance_largeoldtrees:personalsat_life, is.na)) %>%
+    # classify inner, middle, and outer region responses
+    mutate(region = case_when(
+      municipality %in% "Montreal" == T ~ "inner",
+      municipality %in% c("Laval", "Lac-Saint-Louis district (e.g., Point Claire, Beaconsfield)", "Longueuil", "Vaudreuil-Soulanges") == T ~ "middle",
+      municipality %in% c("Châteauguay-Lacolle", "Montarville", "Terrebonne") == T ~ "outer",
+      municipality %in% c("Joliette", "Saint-Hyacinthe-Bagot", "Saint-Jean", "Argenteuil-La Petite-Nation") == T ~ "regional"
+    ))
+  
+  
+  return(mtl_eng_filt)
+  
   
   
 }
