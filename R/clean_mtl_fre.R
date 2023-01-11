@@ -45,6 +45,7 @@ clean_mtl_fre <- function(mtl_fr_raw){
            agree_produceoxygen = dans_quelles_mesures_etes_vous_d_accord_que_les_arbres_dans_votre_municipalite_produisent_de_l_oxygene,
            agree_cooling = dans_quelles_mesures_etes_vous_d_accord_que_les_arbres_dans_votre_municipalite_refroidir_le_quartier,
            agree_reducefloods = dans_quelles_mesures_etes_vous_d_accord_que_les_arbres_dans_votre_municipalite_reduisent_les_inondations,
+           agree_goodexercise = dans_quelles_mesures_etes_vous_d_accord_que_les_arbres_dans_votre_municipalite_creer_un_endroit_propice_a_l_exercice_marcher_courir_faire_du_velo,
            agree_goodshopping = dans_quelles_mesures_etes_vous_d_accord_que_les_arbres_dans_votre_municipalite_sont_un_bon_endroit_pour_magasiner,
            agree_incpropertyvalues = dans_quelles_mesures_etes_vous_d_accord_que_les_arbres_dans_votre_municipalite_augmentent_la_valeur_des_proprietes,
            agree_spiritual = dans_quelles_mesures_etes_vous_d_accord_que_les_arbres_dans_votre_municipalite_sont_spirituels,
@@ -124,10 +125,10 @@ clean_mtl_fre <- function(mtl_fr_raw){
            gender_choice = a_quel_genre_identifiez_vous_selected_choice,
            gender_other = a_quel_genre_identifiez_vous_autre_definir_si_vous_voulez_text,
            postcode_choice = quel_est_votre_code_postal_selected_choice,
-           postcode_other = mtlraw$quel_est_votre_code_postal_please_type_either_the_first_3_digits_or_the_full_6_digits_text)
+           postcode_other = quel_est_votre_code_postal_please_type_either_the_first_3_digits_or_the_full_6_digits_text)
   
   
-  mtl_eng_filt <- mtl_eng_rcols %>%
+  mtl_fr_filt <- mtl_fr_rcols %>%
     # remove undesirable response types
     filter(finished == "True",
            eighteen == "Yes",
@@ -143,7 +144,7 @@ clean_mtl_fre <- function(mtl_fr_raw){
     ))
   
   
-  mtl_eng_sel <- mtl_eng_filt %>%
+  mtl_fr_sel <- mtl_fr_filt %>%
     select(start_date, response_type, ip_address, sesskey, response_id, location_latitude, location_longitude, user_language,
            municipality, region, postcode_other, importance_largeoldtrees, importance_historystories, importance_stressrelief, importance_walks, 
            importance_culturaltraditions, importance_accessiblespace, importance_cleanairwatercity, importance_nativespecies,
@@ -167,5 +168,5 @@ clean_mtl_fre <- function(mtl_fr_raw){
            length_urban, length_rural, housing_choice, housing_other, dwelling_choice, dwelling_other, canadaborn, year_arrival_other, canadabornparents,
            language_other, birthdecade, education, envorg, ethnicity_choice, ethnicity_other, gender_choice, gender_other)
   
-  return(mtl_eng_sel)
+  return(mtl_fr_sel)
 }
