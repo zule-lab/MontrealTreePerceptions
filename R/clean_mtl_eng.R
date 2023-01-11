@@ -45,6 +45,7 @@ clean_mtl_eng <- function(mtl_eng_raw){
            agree_produceoxygen = how_much_do_you_agree_that_the_trees_in_your_city_or_neighbourhood_produce_oxygen,
            agree_cooling = how_much_do_you_agree_that_the_trees_in_your_city_or_neighbourhood_cool_the_neighborhood,
            agree_reducefloods = how_much_do_you_agree_that_the_trees_in_your_city_or_neighbourhood_reduce_flooding,
+           agree_goodexercise = how_much_do_you_agree_that_the_trees_in_your_city_or_neighbourhood_make_a_place_good_for_exercise_walk_run_cycle,
            agree_goodshopping = how_much_do_you_agree_that_the_trees_in_your_city_or_neighbourhood_make_a_place_good_for_shopping,
            agree_incpropertyvalues = how_much_do_you_agree_that_the_trees_in_your_city_or_neighbourhood_increase_property_values,
            agree_spiritual = how_much_do_you_agree_that_the_trees_in_your_city_or_neighbourhood_are_spiritual,
@@ -143,7 +144,31 @@ clean_mtl_eng <- function(mtl_eng_raw){
     ))
   
   
-  return(mtl_eng_filt)
+  mtl_eng_sel <- mtl_eng_filt %>%
+    select(start_date, response_type, ip_address, response_id, location_latitude, location_longitude, user_language,
+           municipality, region, postcode_other, importance_largeoldtrees, importance_historystories, importance_stressrelief, importance_walks, 
+           importance_culturaltraditions, importance_accessiblespace, importance_cleanairwatercity, importance_nativespecies,
+           importance_welcoming, importance_liveability, importance_socializing, importance_communitycohesion, importance_beauty,
+           importance_cleanenvsupportingppl, importance_attractingpeople, importance_maintainculture,
+           agree_allergies, agree_blockroadsigns, agree_damageproperty, agree_messy, agree_ugly, agree_toomuchwater, agree_blockpipes,
+           agree_blocksun, agree_expensive, agree_dropbranches, agree_toomuchspace, agree_wildfires, agree_undesirableanimals, 
+           agree_desirableanimals, agree_screenbadviews, agree_createsafety, agree_calming, agree_cleanair, agree_provideshade,
+           agree_produceoxygen, agree_cooling, agree_reducefloods, agree_goodexercise, agree_goodshopping, agree_incpropertyvalues, 
+           agree_spiritual, agree_stressful, agree_healty, donate_family, donate_individual, knowledge_planting, knowledge_caring,
+           knowledge_identifyingnativesp, knowledge_treenames, experience_havetree, experience_plantedtree, experience_removetree,
+           experience_feedback, average_yardtime, average_parktime, satisfaction_typeloctree, satisfaction_attractiveness, 
+           satisfaction_risk, satisfaction_quantity, satisfaction_nativeness, satisfaction_exoticness, satisfaction_diversity,
+           satisfaction_habitat, satisfaction_timelyreplacement, satisfaction_removal, satisfaction_equity, satisfaction_responsiveness,
+           satisfaction_investment, satisfaction_communityengagement, satisfaction_managementwateringpruning, satisfaction_managementhabitat,
+           governance_allowspublicinfluence, governance_listenstopublic, governance_truthfulness, governance_rightdecision,
+           governance_goodjob, governance_trustworthiness, neighbourhood_helpfulness, neighbourhood_closeness, neighbourhood_trustworthiness,
+           neighbourhood_dontgetalong, neighbourhood_differingvalues, rate_remotewildernessvacation, rate_personalactionsenvironment, rate_naturespirtual,
+           rate_noticewildlife, rate_natureimportance, rate_eartheconnection, personalsat_standardliving, personalsat_health, personalsat_achievement,
+           personalsat_relationships, personalsat_safety, personalsat_community, personalsat_futuresecurity, personalsat_life, length_neighbourhood,
+           length_urban, length_rural, housing_choice, housing_other, dwelling_choice, dwelling_other, canadaborn, year_arrival_other, canadabornparents,
+           language_other, birthdecade, education, envorg, ethnicity_choice, ethnicity_other, gender_choice, gender_other)
+  
+  return(mtl_eng_sel)
   
   
   
