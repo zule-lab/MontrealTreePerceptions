@@ -26,27 +26,13 @@ restore()
 
 targets_input <- c(
   
-  tar_file_read(mtl_eng_raw,
-           "input/survey/UrbanForestCommunitySurvey_Montreal_ENG_corrected.csv",
-           read.csv(file = !!.x, skip = 1)),
-  
-  tar_file_read(mtl_fre_raw,
-           "input/survey/UrbanForestCommunitySurvey_Montreal_FRE_corrected.csv",
-           read.csv(file = !!.x, skip = 1)),
-  
-  tar_target(
-    mtl_eng_clean,
-    clean_mtl_eng(mtl_eng_raw)
-  ),
-  
-  tar_target(
-    mtl_fre_clean,
-    clean_mtl_fre(mtl_fre_raw)
-  ),
+  tar_file_read(mtl_raw,
+           "input/survey/Montreal_cleaned.csv", # raw survey data from Qualtrics cleaned by Camilo & Kuan
+           read.csv(file = !!.x)),
   
   tar_target(
     mtl_clean,
-    rbind(mtl_eng_clean, mtl_fre_clean) # need to remove duplicates? matching IP addresses across FR/EN surveys?
+    clean_mtl(mtl_raw)
   )
   
 )
