@@ -131,7 +131,7 @@ clean_mtl_fre <- function(mtl_fr_raw){
   mtl_fr_filt <- mtl_fr_rcols %>%
     # remove undesirable response types
     filter(finished == "True",
-           eighteen == "Yes",
+           eighteen == "Oui",
            !municipality %in% c("Dorval", "Blainville", "Oka", "Aucune des réponses ci-dessus / autre"), # dummy cities,
            response_type != "Spam",
            !if_all(importance_largeoldtrees:personalsat_life, is.na)) %>%
@@ -141,7 +141,8 @@ clean_mtl_fre <- function(mtl_fr_raw){
       municipality %in% c("Laval", "Lac-Saint-Louis district (e.g., Point Claire, Beaconsfield)", "Longueuil", "Vaudreuil-Soulanges") == T ~ "middle",
       municipality %in% c("Châteauguay-Lacolle", "Montarville", "Terrebonne") == T ~ "outer",
       municipality %in% c("Joliette", "Saint-Hyacinthe-Bagot", "Saint-Jean", "Argenteuil-La Petite-Nation") == T ~ "regional"
-    ))
+    ),
+    user_language = "FR")
   
   
   mtl_fr_sel <- mtl_fr_filt %>%
