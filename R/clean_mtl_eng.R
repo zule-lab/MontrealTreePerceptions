@@ -145,7 +145,7 @@ clean_mtl_eng <- function(mtl_eng_raw){
   
   
   mtl_eng_sel <- mtl_eng_filt %>%
-    select(start_date, response_type, ip_address, response_id, location_latitude, location_longitude, user_language,
+    select(start_date, response_type, ip_address, sesskey, response_id, location_latitude, location_longitude, user_language,
            municipality, region, postcode_other, importance_largeoldtrees, importance_historystories, importance_stressrelief, importance_walks, 
            importance_culturaltraditions, importance_accessiblespace, importance_cleanairwatercity, importance_nativespecies,
            importance_welcoming, importance_liveability, importance_socializing, importance_communitycohesion, importance_beauty,
