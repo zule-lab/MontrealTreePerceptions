@@ -12,6 +12,10 @@ clean_mtl <- function(mtl_raw){
   
   mtl_code <- mtl_sel %>%
     mutate(
+      years_neigh = as.numeric(years_neigh),
+      
+      years_urban = as.numeric(years_urban),
+      
       housing_type_of_dwelling = case_when(housing_type_of_dwelling %in% "House / Maison" == T ~ 0,
                                            housing_type_of_dwelling %in% "Apartment house / Appartement maison" == T ~ 1,
                                            housing_type_of_dwelling %in% "Apartment building / Appartement édifice" == T ~ 2,
