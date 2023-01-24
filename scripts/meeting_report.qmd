@@ -52,14 +52,36 @@ digraph G {
 ```{r, echo = F, eval = T, message=F, warning=F}
 library(targets)
 library(ggpubr)
+library(tidyr)
 
-ggplot(mtl_clean) + 
-  geom_boxplot(aes(y = uf_vals_large_old_trees))
+mtl_clean <- tar_read(mtl_clean)
 
+long <- pivot_longer(mtl_clean, cols = starts_with("uf_vals"))
+
+ggboxplot(long, "name", "value", add = "jitter")
 ```
 
 **Tree Beliefs (Negative)**
+```{r, echo = F, eval = T, message=F, warning=F}
+library(targets)
+library(ggpubr)
+library(tidyr)
+
+long <- pivot_longer(mtl_clean, cols = starts_with("beliefs_negatives"))
+
+ggboxplot(long, "name", "value", add = "jitter")
+```
 
 **Tree Beliefs(Positive)**
+
+```{r, echo = F, eval = T, message=F, warning=F}
+library(targets)
+library(ggpubr)
+library(tidyr)
+
+long <- pivot_longer(mtl_clean, cols = starts_with("beliefs_positives"))
+
+ggboxplot(long, "name", "value", add = "jitter")
+```
 
 **Explanatories**

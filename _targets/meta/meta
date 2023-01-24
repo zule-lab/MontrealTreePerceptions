@@ -1,10 +1,10 @@
 name|type|data|command|depend|seed|path|time|size|bytes|format|repository|iteration|parent|children|seconds|warnings|error
-.Random.seed|object|759ff30849480c32|||||||||||||||
+.Random.seed|object|c2647d159badfcb2|||||||||||||||
 clean_mtl|function|a0224a480ffbe423|||||||||||||||
 clean_mtl_eng|function|194bfb15417d3c2a|||||||||||||||
 clean_mtl_fre|function|234b73cdb59d6d12|||||||||||||||
 cohesion_mod|stem|f1e867ae7212ce37|c6762f377d0c4d13|69c358f95ad10ffd|-805658098||t19373.8701959631s||153189|qs|local|vector|||0.02||lavaan ERROR some observed variables specified in the model are not found in the dataset social_cohesion_new_1_help_neighbors social_cohesion_new_2_close_knit_neighborhood social_cohesion_new_3_neighborhood_trust social_cohesion_new_4_negative_people_don_t_get_along_reversed social_cohesion_new_5_negative_do_not_share_values_reverse years_neigh years_urban decade gender_f
-meeting_report|stem|2f4ea9f321e56f8c|3a01f463ee40f3f7|d84d7cdd1c3c4b08|-577404127|scripts/meeting_report.html*scripts/meeting_report.qmd|t19381.7619205111s|f84473ca9b52cea9|804463|file|local|vector|||3.48||
+meeting_report|stem|2f4ea9f321e56f8c|3a01f463ee40f3f7|d84d7cdd1c3c4b08|-577404127|scripts/meeting_report.html*scripts/meeting_report.qmd|t19381.7619205111s||804463|file|local|vector|||3.45||33m39m System command quarto.exe failed
 mtl_clean|stem|2663ef64ea1d623a|728cbda271df4b5d|626e802aff13de05|870587379||t19381.6722017825s|dd167b22d3c14e53|66382|qs|local|vector|||0.15||
 mtl_eng_clean|stem|bcd26395eb46b531|6efc8411502986c3|e0acf738c0cd7d10|1074184863||t19368.8069696458s|05ae09ecf197eccf|102587|qs|local|vector|||0.573||
 mtl_eng_raw|stem|ff295d1f536f1d22|567676048423ced8|94dc8e61a1f12e61|1155880378||t19367.8386893672s|48ff0059130761bf|154068|qs|local|vector|||0.099||

@@ -7,6 +7,7 @@ conflict_prefer_all("dplyr", "stats", quiet = T)
 
 library(janitor)
 library(dplyr)
+library(tidyr)
 
 library(lavaan)
 
