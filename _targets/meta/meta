@@ -12,5 +12,7 @@ mtl_fre_raw|stem|3eef266a7b4b7a33|88151be4c9d00138|77d6f983565ff53d|1238921695||
 mtl_fre_raw_file|stem|f1fe606b7c600ce9|108872bda093887c|ef46db3751d8e999|44426204|input/survey/UrbanForestCommunitySurvey_Montreal_FRE_corrected.csv|t19367.8680298477s|409dae222b9878f6|953006|file|local|vector|||0.002||
 mtl_raw|stem|c7fa11d19eb18584|e9ec0883c3f80ce1|3f1696a208a5f8c5|-2050430421||t19373.8103952373s|14e54a67311d7448|328719|qs|local|vector|||0.11||
 mtl_raw_file|stem|538f073b9f7edaeb|ea738f1a37788f4d|ef46db3751d8e999|1513051185|input/survey/Montreal_cleaned.csv|t19373.810122391s|fb33041fc13c0e92|1520134|file|local|vector|||0||
+negbeliefs_mod|stem|5ee6d0a37ecc79eb|917bfcbe4d7dda9e|69c358f95ad10ffd|99669365||t19381.6795291269s|fd19562dafe97ae0|827155|qs|local|vector|||3.35||
+posbeliefs_mod|stem|9aa07ea5d6dca7b5|f5656234e4cd94a7|69c358f95ad10ffd|-2077530034||t19381.6794333427s|da69db1662be2ae5|824323|qs|local|vector|||3.57||
 targets_input|object|5d2614a3cf439ac2|||||||||||||||
-values_mod|stem|d03583d5991aa1e9|c6762f377d0c4d13|4327c6345d1d1baa|-1259225585||t19373.8574024155s|5bedfb1aa97c1386|153199|qs|local|vector|||1.01||
+values_mod|stem|342f5008693cb7f8|b07643ec3b6d858f|69c358f95ad10ffd|-1259225585||t19381.6794902889s|be354b02cd59465f|1182381|qs|local|vector|||4.91||
