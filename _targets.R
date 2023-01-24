@@ -71,7 +71,7 @@ c(
   
   tar_quarto(
     meeting_report,
-    path = "scripts/meeting_report.qmd"
+    path = "meeting_report.qmd"
   )
   
 )
