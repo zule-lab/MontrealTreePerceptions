@@ -67,6 +67,11 @@ c(
         data = mtl_clean,
         ordered = T)
     
+  ),
+  
+  tar_quarto(
+    meeting_report,
+    path = "scripts/meeting_report.qmd"
   )
   
 )

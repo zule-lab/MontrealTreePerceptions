@@ -9,3 +9,9 @@ library(janitor)
 library(dplyr)
 
 library(lavaan)
+
+library(rmarkdown)
+library(quarto)
+
+library(ggpubr)
+library(ggplot2)

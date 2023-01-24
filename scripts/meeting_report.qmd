@@ -1,0 +1,65 @@
+---
+title: "Montréal Urban Perceptions Meeting"
+date: January 26, 2023
+format: 
+  html:
+    embed-resources: true
+---
+
+### Proposed Research Question
+
+How are Montréal residents' values and beliefs concerning trees influenced by their culture (Canadian born), preferred language, dwelling type, education level, and city type?
+
+**Justification:** selected the variables that came out as important in street tree cover from Pham et al., 2017 + city type
+
+**Hypothesis:** values and beliefs regarding trees are influenced by sociodemographics, as well as exposure to trees (street tree cover)
+
+------------------------------------------------------------------------
+
+### Street Tree Cover
+
+**Discussion Question:** should we add street tree cover to our models?
+
+-   Without adding street tree cover, we can measure the *total effect* of sociodemographics on people's values/beliefs (this includes the unmeasured effect of the influence of street tree cover on their values/beliefs)
+
+```{dot}
+//| fig-width: 8
+//| fig-align: center
+digraph G {
+    
+    bgcolor="transparent"
+    node [style=filled,color=white]
+    edge [color="black"]
+    
+    rankdir=LR
+    
+    Sociodemographics [shape=box]
+    Tree_Values_Beliefs [shape=box]
+    
+    Sociodemographics -> Street_Tree_Cover;
+    Sociodemographics -> Tree_Values_Beliefs;
+    Street_Tree_Cover -> Tree_Values_Beliefs;
+    
+}
+```
+
+------------------------------------------------------------------------
+
+### The Data
+
+**Tree Values**
+
+```{r, echo = F, eval = T, message=F, warning=F}
+library(targets)
+library(ggpubr)
+
+ggplot(mtl_clean) + 
+  geom_boxplot(aes(y = uf_vals_large_old_trees))
+
+```
+
+**Tree Beliefs (Negative)**
+
+**Tree Beliefs(Positive)**
+
+**Explanatories**
