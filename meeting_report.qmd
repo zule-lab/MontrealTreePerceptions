@@ -6,10 +6,35 @@ format:
     embed-resources: true
 ---
 
+### Background
+
+We want to explore how people's perceptions of urban trees varies with their sociodemographics. Specifically, we want to dig deeper into understanding people's perceptions in *Montréal*. We want to use the survey data to ask more pointed and meaningful questions about Montréal specifically (e.g., examine the issue of language).
+
+There is potential for 2+ papers here. Following the first meeting, we decided that the questions of governance and management could be tackled by Emile in a separate paper, as he has a lot of expertise in this field.
+
+This paper will be focused on questions regarding the valuation and beliefs surrounding urban trees (as opposed to questions of governance, tree knowledge, etc.)
+
+------------------------------------------------------------------------
+
 ### Proposed Research Question
 
-How are Montréal residents' values and beliefs concerning trees influenced by their culture (Canadian born), preferred language, dwelling type, education level, and city type?
+How are Montréal residents' values and beliefs concerning urban trees influenced by city type, country of origin, preferred language, dwelling type, education level?
 
+-   **Dependent variables:**
+
+    -   Tree Value survey questions (15) - e.g., How important to you are each of the following things about these trees: large old trees?
+    -   Tree Beliefs (Negative) survey questions (12) - e.g., How much do you agree that the trees in your city or neighbourhood are ugly?    
+    -   Tree Beliefs (Positive) survey questions (12) - e.g., How much do you agree that the trees in your city or neighbourhood are calming?
+
+-   **Independent variables:**
+
+    -   City type (inner, middle, outer, regional)
+    -   Country of origin (Canadian born with Canadian born parents, Canadian born with parents born abroad, born abroad)
+    -   Preferred language(English, French, Other with preferred official language English, Other with preferred official language French)
+    -   Dwelling type (house, apartment in a house, apartment in a building, other, prefer not to answer)
+    -   Education level (prefer not to answer, did not complete high school, high school, trade school, bac, masters, doc)
+    
+    
 **Justification:** selected the variables that came out as important in street tree cover from Pham et al., 2017 + city type
 
 **Hypothesis:** values and beliefs regarding trees are influenced by sociodemographics, as well as exposure to trees (street tree cover)
@@ -62,6 +87,7 @@ ggboxplot(long, "name", "value", add = "jitter")
 ```
 
 **Tree Beliefs (Negative)**
+
 ```{r, echo = F, eval = T, message=F, warning=F}
 long <- pivot_longer(mtl_clean, cols = starts_with("beliefs_negatives"))
 
