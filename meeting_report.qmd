@@ -3,6 +3,8 @@ title: "Montréal Urban Perceptions Meeting"
 date: January 26, 2023
 format: 
   html:
+    fig-width: 12
+    fig-height: 10
     embed-resources: true
 ---
 
@@ -118,9 +120,11 @@ How important to you are each of the following things about these trees
 
 -   maintain Indigenous or European cultures
 
-```{r, echo = F, eval = T, message=F, warning=F}
-
-#| fig-cap: Questions regarding values of trees that varied significantly with level of education 
+```{r}
+#| echo: FALSE
+#| eval: TRUE
+#| warning: FALSE
+#| fig-cap: Fig 1. Questions regarding values of trees that varied significantly with level of education 
 
 
 library(targets)
@@ -157,17 +161,21 @@ long_val_edu <- pivot_longer(mtl_val_edu, cols = starts_with("uf_vals"), names_t
 
 ggplot(long_val_edu, aes(question, response)) + 
   geom_boxplot(outlier.shape = NA) + 
-  geom_jitter(aes(color = edu), alpha = 0.7, size = 0.25, width =0.25) + 
+  geom_jitter(aes(color = edu), alpha = 0.7, size = 0.5, width =0.25) + 
   theme_classic() + 
   labs(x = NULL, y = NULL, color = NULL) + 
   scale_colour_manual(breaks = c("No High School", "High School", "Trade School", "Bac", "Masters", "Doc", "N/A"), values = c("#c2d6a4", "#9cc184", "#669d62", "#3c7c3d", "#1f5b25", "#1e3d14", "#192813")) + 
-  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+  theme(axis.text.x = element_text(angle = 45, hjust = 1),
+        axis.text = element_text(size=14),
+        legend.text = element_text(size =14))
 
 ```
 
-```{r, echo = F, eval = T, message=F, warning=F}
-
-#| fig-cap: Questions regarding values of trees that varied significantly with country of origin
+```{r}
+#| echo: FALSE
+#| eval: TRUE
+#| warning: FALSE
+#| fig-cap: Fig 2. Questions regarding values of trees that varied significantly with country of origin
 
 
 mtl_val_imm <- mtl_clean %>% 
@@ -183,17 +191,21 @@ long_val_imm <- pivot_longer(mtl_val_imm, cols = starts_with("uf_vals"), names_t
 
 ggplot(long_val_imm, aes(question, response)) + 
   geom_boxplot(outlier.shape = NA) + 
-  geom_jitter(aes(color = immigrant), alpha = 0.7, size = 0.25, width =0.25) + 
+  geom_jitter(aes(color = immigrant), alpha = 0.7, size = 0.5, width =0.25) + 
   theme_classic() +
   labs(x = NULL, y = NULL, color = NULL) + 
   scale_colour_manual(breaks = c("Born Canadian, Parents Born Canadian", "Born Canadian, Parents Born Abroad", "Born Abroad"), values = c("#1f5b25", "#1e3d14", "#192813")) + 
-  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+  theme(axis.text.x = element_text(angle = 45, hjust = 1),
+        axis.text = element_text(size=14),
+        legend.text = element_text(size =14))
 ```
 
 
-```{r, echo = F, eval = T, message=F, warning=F}
-
-#| fig-cap: Questions regarding values of trees that varied significantly with first language (CODING ERROR)
+```{r}
+#| echo: FALSE
+#| eval: TRUE
+#| warning: FALSE
+#| fig-cap: Fig 3. Questions regarding values of trees that varied significantly with first language (CODING ERROR)
  
 
 mtl_val_lang <- mtl_clean %>% 
@@ -215,16 +227,20 @@ long_val_lang <- pivot_longer(mtl_val_lang, cols = starts_with("uf_vals"), names
 
 ggplot(long_val_lang, aes(question, response)) + 
   geom_boxplot(outlier.shape = NA) + 
-  geom_jitter(aes(color = firstlanguage), alpha = 0.7, size = 0.25, width =0.25) + 
+  geom_jitter(aes(color = firstlanguage), alpha = 0.7, size = 0.5, width =0.25) + 
   theme_classic() +
   labs(x = NULL, y = NULL, color = NULL) + 
   scale_colour_manual(breaks = c("French first language", "English first language", "French preferred official language", "English preferred official language"), values = c("#3c7c3d", "#1f5b25", "#1e3d14", "#192813")) + 
-  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+  theme(axis.text.x = element_text(angle = 45, hjust = 1),
+        axis.text = element_text(size=14),
+        legend.text = element_text(size =14))
 ```
 
-```{r, echo = F, eval = T, message=F, warning=F}
-
-#| fig-cap: Questions regarding values of trees that varied significantly with dwelling status
+```{r}
+#| echo: FALSE
+#| eval: TRUE
+#| warning: FALSE
+#| fig-cap: Fig 4. Questions regarding values of trees that varied significantly with dwelling status
 
 mtl_val_dwel <- mtl_clean %>% 
   select(housing_code, uf_vals_maintaining_aboriginal_or_european_culture)
@@ -237,11 +253,13 @@ long_val_dwel <- pivot_longer(mtl_val_dwel, cols = starts_with("uf_vals"), names
 
 ggplot(long_val_dwel, aes(question, response)) + 
   geom_boxplot(outlier.shape = NA) + 
-  geom_jitter(aes(color = housing_code), alpha = 0.7, size = 0.3, width =0.25) + 
+  geom_jitter(aes(color = housing_code), alpha = 0.7, size = 0.5, width =0.25) + 
   theme_classic() +
   labs(x = NULL, y = NULL, color = NULL) + 
   scale_colour_manual(breaks = c("own", "rent", "other"), values = c("#1f5b25", "#1e3d14", "#192813")) + 
-  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+  theme(axis.text.x = element_text(angle = 45, hjust = 1),
+        axis.text = element_text(size=14),
+        legend.text = element_text(size=14))
 ```
 
 
