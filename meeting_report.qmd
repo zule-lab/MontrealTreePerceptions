@@ -23,7 +23,7 @@ How are Montréal residents' values and beliefs concerning urban trees influence
 -   **Dependent variables:**
 
     -   Tree Value survey questions (15) - e.g., How important to you are each of the following things about these trees: large old trees?
-    -   Tree Beliefs (Negative) survey questions (12) - e.g., How much do you agree that the trees in your city or neighbourhood are ugly?    
+    -   Tree Beliefs (Negative) survey questions (12) - e.g., How much do you agree that the trees in your city or neighbourhood are ugly?\
     -   Tree Beliefs (Positive) survey questions (12) - e.g., How much do you agree that the trees in your city or neighbourhood are calming?
 
 -   **Independent variables:**
@@ -33,19 +33,22 @@ How are Montréal residents' values and beliefs concerning urban trees influence
     -   Preferred language(English, French, Other with preferred official language English, Other with preferred official language French)
     -   Dwelling type (house, apartment in a house, apartment in a building, other, prefer not to answer)
     -   Education level (prefer not to answer, did not complete high school, high school, trade school, bac, masters, doc)
-    
-    
-**Justification:** selected the variables that came out as important in street tree cover from Pham et al., 2017 + city type
 
-**Hypothesis:** values and beliefs regarding trees are influenced by sociodemographics, as well as exposure to trees (street tree cover)
+**Justification:** People's values and beliefs concerning urban trees are inherently died to the delivery and access of ecosystem services. To effectively manage and produce ecosystem services that truly serve people, we require knowledge surrounding what people value and what drives individual differences in values. The independent variables were selected based on the variables shown to influence street tree cover in Pham et al. (2017). In addition, we are testing the effect of city type on tree values and beliefs, as there is literature showing a divide in conceptions of nature between urban and rural residents (cite).
+
+**Hypothesis:** values and beliefs concerning urban trees are influenced by sociodemographics directly and indirectly through exposure to trees (i.e., amount of street tree cover in your neighbourhood).
+
+**Predictions:** would love some help from Hiên and Emile to craft some predictions for each independent variable (e.g., how do we predict level of education will influence values and beliefs concerning urban trees?). I am happy to craft them together but I think the social science expertise offered by Hiên and Emile will strengthen the predictions a lot.
 
 ------------------------------------------------------------------------
 
 ### Street Tree Cover
 
-**Discussion Question:** should we add street tree cover to our models?
+The variables selected: country of origin, preferred language, dwelling type, and education level are all based on Pham et al. (2017), which demonstrates the relationship between these variables and *street tree cover* in Montreal. We can conceive of the relationship between these sociodemographic variables and values and beliefs surrounding urban trees as **direct** and **indirect**, where the indirect effect is the effects of sociodemographics on tree values and beliefs *through* street tree cover. This begs the question:
 
--   Without adding street tree cover, we can measure the *total effect* of sociodemographics on people's values/beliefs (this includes the unmeasured effect of the influence of street tree cover on their values/beliefs)
+> Should we add street tree cover to our models?
+
+-   Without adding street tree cover, we can measure the *total effect* of sociodemographics on people's values/beliefs (this includes the unmeasured effect of the influence of street tree cover on their values/beliefs). If we choose to add street tree cover, we can measure the *direct effect* of sociodemographics on people's values and beliefs by controlling for street tree cover.
 
 ```{dot}
 //| fig-width: 8
@@ -68,38 +71,190 @@ digraph G {
 }
 ```
 
+-   To measure street tree cover, we would assign respondents a "neighbourhood" using the first 3 digits of postal codes, and then measure the average canopy cover in that area.
+
+-   Potential Issues:
+
+    -   Only 2/3 (\~1,100) of respondents provided this information, so we would lose some data
+    -   Postal code areas have wide variation in size, especially in rural areas they are quite large, so this may not facilitate the best comparison
+
 ------------------------------------------------------------------------
 
-### The Data
+### Tree Values
 
-**Tree Values**
+There are 16 questions that we asked survey respondents regarding how they value urban trees. They are as follows (~~strikethrough~~ indicates no significant relationship with any of our independent variable, significant relationships will be visualized below):
+
+How important to you are each of the following things about these trees
+
+-   large old trees
+
+-   a place for human history and stories
+
+-   ~~getting away from stresses of everyday life~~
+
+-   a place for a short walk
+
+-   learning about cultural traditions
+
+-   ~~a place that is accessible for everybody~~
+
+-   clean air, clean water, and healthy cities
+
+-   many kinds of native animals, birds, and plants
+
+-   make the city more welcoming
+
+-   a more liveable city
+
+-   ~~spaces for people to interact and socialize~~
+
+-   trees improving community cohesion
+
+-   beautiful sights, sounds, and smells
+
+-   ~~a healthy environment that supports human life~~
+
+-   ~~attracting tourists and residents to the city~~
+
+-   maintain Indigenous or European cultures
 
 ```{r, echo = F, eval = T, message=F, warning=F}
+
+#| fig-cap: Questions regarding values of trees that varied significantly with level of education 
+
+
 library(targets)
-library(ggpubr)
+library(ggplot2)
 library(tidyr)
+library(dplyr)
 
 mtl_clean <- tar_read(mtl_clean)
 
-long <- pivot_longer(mtl_clean, cols = starts_with("uf_vals"))
+mtl_val_edu <- mtl_clean %>% 
+  select(edu, uf_vals_large_old_trees, uf_vals_learning_about_cultural_traditions,
+         uf_vals_clean_air_clean_water_and_healthy_cities, uf_vals_make_the_city_more_welcoming,
+         uf_vals_a_more_liveable_city, uf_vals_improving_community_cohesion,
+         uf_vals_beautiful_sights_sounds_and_smells,
+         uf_vals_maintaining_aboriginal_or_european_culture)
 
-ggboxplot(long, "name", "value", add = "jitter")
+long_val_edu <- pivot_longer(mtl_val_edu, cols = starts_with("uf_vals"), names_to = "question", values_to = "response") %>%
+  mutate(question = case_when(question == "uf_vals_large_old_trees" ~ "large old trees",
+                              question == "uf_vals_learning_about_cultural_traditions" ~ "cultural traditions",
+                              question == "uf_vals_clean_air_clean_water_and_healthy_cities" ~ "clean cities",
+                              question == "uf_vals_make_the_city_more_welcoming" ~ "welcoming city",
+                              question == "uf_vals_a_more_liveable_city" ~ "liveable city",
+                              question == "uf_vals_improving_community_cohesion" ~ "community cohesion",
+                              question == "uf_vals_beautiful_sights_sounds_and_smells" ~ "beauty",
+                              question == "uf_vals_maintaining_aboriginal_or_european_culture" ~ "maintaining culture"),
+         
+         edu = case_when(edu == 0 ~ "N/A",
+                         edu == 1 ~ "No High School",
+                         edu == 2 ~ "High School",
+                         edu == 3 ~ "Trade School",
+                         edu == 4 ~ "Bac",
+                         edu == 5 ~ "Masters",
+                         edu == 6 ~ "Doc"))
+
+ggplot(long_val_edu, aes(question, response)) + 
+  geom_boxplot(outlier.shape = NA) + 
+  geom_jitter(aes(color = edu), alpha = 0.7, size = 0.25, width =0.25) + 
+  theme_classic() + 
+  labs(x = NULL, y = NULL, color = NULL) + 
+  scale_colour_manual(breaks = c("No High School", "High School", "Trade School", "Bac", "Masters", "Doc", "N/A"), values = c("#c2d6a4", "#9cc184", "#669d62", "#3c7c3d", "#1f5b25", "#1e3d14", "#192813")) + 
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+
 ```
+
+```{r, echo = F, eval = T, message=F, warning=F}
+
+#| fig-cap: Questions regarding values of trees that varied significantly with country of origin
+
+
+mtl_val_imm <- mtl_clean %>% 
+  select(immigrant, uf_vals_large_old_trees,
+         uf_vals_habitat_for_rare_or_threatened_plants_birds_and_animals)
+
+long_val_imm <- pivot_longer(mtl_val_imm, cols = starts_with("uf_vals"), names_to = "question", values_to = "response") %>%
+  mutate(question = case_when(question == "uf_vals_large_old_trees" ~ "large old trees",
+                              question == "uf_vals_habitat_for_rare_or_threatened_plants_birds_and_animals" ~ "habitat"),
+         immigrant = case_when(immigrant == 1 ~ "Born Canadian, Parents Born Canadian",
+                               immigrant == 2 ~ "Born Canadian, Parents Born Abroad", 
+                               immigrant == 3 ~ "Born Abroad"))
+
+ggplot(long_val_imm, aes(question, response)) + 
+  geom_boxplot(outlier.shape = NA) + 
+  geom_jitter(aes(color = immigrant), alpha = 0.7, size = 0.25, width =0.25) + 
+  theme_classic() +
+  labs(x = NULL, y = NULL, color = NULL) + 
+  scale_colour_manual(breaks = c("Born Canadian, Parents Born Canadian", "Born Canadian, Parents Born Abroad", "Born Abroad"), values = c("#1f5b25", "#1e3d14", "#192813")) + 
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+```
+
+
+```{r, echo = F, eval = T, message=F, warning=F}
+
+#| fig-cap: Questions regarding values of trees that varied significantly with first language (CODING ERROR)
+ 
+
+mtl_val_lang <- mtl_clean %>% 
+  select(firstlanguage, uf_vals_a_place_for_human_history_and_stories, uf_vals_a_place_for_a_short_walk,
+         uf_vals_learning_about_cultural_traditions,
+         uf_vals_habitat_for_rare_or_threatened_plants_birds_and_animals,
+         uf_vals_maintaining_aboriginal_or_european_culture)
+
+long_val_lang <- pivot_longer(mtl_val_lang, cols = starts_with("uf_vals"), names_to = "question", values_to = "response") %>% 
+  mutate(question = case_when(question == "uf_vals_a_place_for_human_history_and_stories" ~ "human history and stories",
+                              question == "uf_vals_a_place_for_a_short_walk" ~ "walking",
+                              question == "uf_vals_learning_about_cultural_traditions" ~ "cultural",
+                              question == "uf_vals_habitat_for_rare_or_threatened_plants_birds_and_animals" ~ "habitat",
+                              question == "uf_vals_maintaining_aboriginal_or_european_culture" ~ "maintaining culture"),
+         firstlanguage = case_when(firstlanguage == 1 ~ "French first language",
+                                   firstlanguage == 2 ~ "English first language",
+                                   firstlanguage == 3 ~ "French preferred official language",
+                                   firstlanguage == 4 ~ "English preferred official language"))
+
+ggplot(long_val_lang, aes(question, response)) + 
+  geom_boxplot(outlier.shape = NA) + 
+  geom_jitter(aes(color = firstlanguage), alpha = 0.7, size = 0.25, width =0.25) + 
+  theme_classic() +
+  labs(x = NULL, y = NULL, color = NULL) + 
+  scale_colour_manual(breaks = c("French first language", "English first language", "French preferred official language", "English preferred official language"), values = c("#3c7c3d", "#1f5b25", "#1e3d14", "#192813")) + 
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+```
+
+```{r, echo = F, eval = T, message=F, warning=F}
+
+#| fig-cap: Questions regarding values of trees that varied significantly with dwelling status
+
+mtl_val_dwel <- mtl_clean %>% 
+  select(housing_code, uf_vals_maintaining_aboriginal_or_european_culture)
+
+long_val_dwel <- pivot_longer(mtl_val_dwel, cols = starts_with("uf_vals"), names_to = "question", values_to = "response") %>% 
+  mutate(question = case_when(question == "uf_vals_maintaining_aboriginal_or_european_culture" ~ "maintaining culture"),
+         housing_code = case_when(housing_code == 1 ~ "own",
+                                  housing_code == 2 ~ "rent",
+                                  housing_code == 3 ~ "other"))
+
+ggplot(long_val_dwel, aes(question, response)) + 
+  geom_boxplot(outlier.shape = NA) + 
+  geom_jitter(aes(color = housing_code), alpha = 0.7, size = 0.3, width =0.25) + 
+  theme_classic() +
+  labs(x = NULL, y = NULL, color = NULL) + 
+  scale_colour_manual(breaks = c("own", "rent", "other"), values = c("#1f5b25", "#1e3d14", "#192813")) + 
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+```
+
 
 **Tree Beliefs (Negative)**
 
-```{r, echo = F, eval = T, message=F, warning=F}
-long <- pivot_longer(mtl_clean, cols = starts_with("beliefs_negatives"))
 
-ggboxplot(long, "name", "value", add = "jitter")
-```
 
 **Tree Beliefs(Positive)**
 
-```{r, echo = F, eval = T, message=F, warning=F}
-long <- pivot_longer(mtl_clean, cols = starts_with("beliefs_positives"))
 
-ggboxplot(long, "name", "value", add = "jitter")
-```
 
 **Explanatories**
+
+------------------------------------------------------------------------
+
+### Next Steps
