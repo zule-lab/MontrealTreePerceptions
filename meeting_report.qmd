@@ -103,7 +103,7 @@ digraph G {
 
 ### Tree Values
 
-There are 16 questions that we asked survey respondents regarding how they value urban trees. They are as follows (~~strikethrough~~ indicates no significant relationship with any of our independent variable, significant relationships will be visualized below):
+There are 16 questions that we asked survey respondents regarding how they value urban trees. They are as follows (~~strikethrough~~ indicates no significant relationship with any of our independent variables, significant relationships will be visualized below):
 
 How important to you are each of the following things about these trees
 
@@ -147,8 +147,8 @@ Each independent variable that was significantly associated with one or more of 
 #| eval: TRUE
 #| warning: FALSE
 #| fig-subcap: 
-#|   - Fig 1a. Boxlot showing questions (x-axis) where education level is significantly associated to the question. Response levels in terms of "agreement" are on y-axis. 
-#|   - Fig 1b. Barplot with each panel showing a distinct question where education level is significatly associated to the question. X-axis denotes the level of agreement respondents gave with the question and y-axis is counts for each level. Bar plots are split in proportion of each education level.
+#|   - Boxplot showing questions (x-axis) where education level is significantly associated to the question. Response levels in terms of "agreement" are on y-axis. 
+#|   - Barplot with each panel showing a distinct question where education level is significatly associated to the question. X-axis denotes the level of agreement respondents gave with the question and y-axis is counts for each level. Bar plots are split in proportion of each education level.
 
 mtl_val_edu <- mtl_clean %>% 
   select(edu, uf_vals_large_old_trees, uf_vals_learning_about_cultural_traditions,
@@ -188,8 +188,8 @@ make_barplot(long_val_edu, long_val_edu$edu, c("No High School", "High School", 
 #| eval: TRUE
 #| warning: FALSE
 #| fig-subcap: 
-#|   - Fig 2a. Boxlot showing questions (x-axis) where country of origin is significantly associated to the question. Response levels in terms of "agreement" are on y-axis. 
-#|   - Fig 2b. Barplot with each panel showing a distinct question where country of origin is significatly associated to the question. X-axis denotes the level of agreement respondents gave with the question and y-axis is counts for each level. Bar plots are split in proportion of each country of origin option.
+#|   - Boxplot showing questions (x-axis) where country of origin is significantly associated to the question. Response levels in terms of "agreement" are on y-axis. 
+#|   - Barplot with each panel showing a distinct question where country of origin is significatly associated to the question. X-axis denotes the level of agreement respondents gave with the question and y-axis is counts for each level. Bar plots are split in proportion of each country of origin option.
 
 mtl_val_imm <- mtl_clean %>% 
   select(immigrant, uf_vals_large_old_trees,
@@ -214,8 +214,8 @@ make_barplot(long_val_imm, long_val_imm$immigrant, c("Born Canadian, Parents Bor
 #| eval: TRUE
 #| warning: FALSE
 #| fig-subcap: 
-#|   - Fig 3a. Boxlot showing questions (x-axis) where first language is significantly associated to the question. Response levels in terms of "agreement" are on y-axis. 
-#|   - Fig 3b. Barplot with each panel showing a distinct question where first language is significatly associated to the question. X-axis denotes the level of agreement respondents gave with the question and y-axis is counts for each level. Bar plots are split in proportion of each first language option.
+#|   - Boxplot showing questions (x-axis) where first language is significantly associated to the question. Response levels in terms of "agreement" are on y-axis. 
+#|   - Barplot with each panel showing a distinct question where first language is significatly associated to the question. X-axis denotes the level of agreement respondents gave with the question and y-axis is counts for each level. Bar plots are split in proportion of each first language option.
  
 
 mtl_val_lang <- mtl_clean %>% 
@@ -247,8 +247,8 @@ make_barplot(long_val_lang, long_val_lang$firstlanguage, c("French first languag
 #| eval: TRUE
 #| warning: FALSE
 #| fig-subcap: 
-#|   - Fig 4a. Boxlot showing questions (x-axis) where housing status is significantly associated to the question. Response levels in terms of "agreement" are on y-axis. 
-#|   - Fig 4b. Barplot with each panel showing a distinct question where housing status is significatly associated to the question. X-axis denotes the level of agreement respondents gave with the question and y-axis is counts for each level. Bar plots are split in proportion of each housing status.
+#|   - Boxplot showing questions (x-axis) where housing status is significantly associated to the question. Response levels in terms of "agreement" are on y-axis. 
+#|   - Barplot with each panel showing a distinct question where housing status is significatly associated to the question. X-axis denotes the level of agreement respondents gave with the question and y-axis is counts for each level. Bar plots are split in proportion of each housing status.
 mtl_val_dwel <- mtl_clean %>% 
   select(housing_code, uf_vals_maintaining_aboriginal_or_european_culture)
 
@@ -267,11 +267,11 @@ make_barplot(long_val_dwel, long_val_dwel$housing_code, c("own", "rent", "other"
 
 ### Tree Beliefs (Negative)
 
-There are 14 questions that we asked survey respondents regarding their negative beliefs about urban trees. They are as follows (significant relationships will be visualized below):
+There are 14 questions that we asked survey respondents regarding their negative beliefs about urban trees. They are as follows (~~strikethrough~~ indicates no significant relationship with any of our independent variables, significant relationships will be visualized below):
 
 How much do you agree that trees in your city or neighbourhood
 
--   cause allergies
+-   ~~cause allergies~~
 -   block the visibility of road signs
 -   damage property including concrete paths and power lines
 -   create mess
@@ -288,9 +288,212 @@ How much do you agree that trees in your city or neighbourhood
 
 Each independent variable that was significantly associated with one or more of the questions is visualized in both a boxplot and barplot below.
 
+```{r}
+#| label: fig-negedu
+#| echo: FALSE
+#| eval: TRUE
+#| warning: FALSE
+#| fig-subcap: 
+#|   - Boxplot showing questions (x-axis) where education level is significantly associated to the question. Response levels in terms of "agreement" are on y-axis. 
+#|   - Barplot with each panel showing a distinct question where education level is significatly associated to the question. X-axis denotes the level of agreement respondents gave with the question and y-axis is counts for each level. Bar plots are split in proportion of each education level.
+
+mtl_neg_edu <- mtl_clean %>% 
+  select(edu, beliefs_negatives_block_the_visibility_of_road_signs, 
+         beliefs_negatives_damage_property_including_concrete_paths_and_powerlines,
+         beliefs_negatives_create_mess, beliefs_negatives_are_ugly, beliefs_negatives_use_too_much_water,
+         beliefs_negatives_block_water_pipes_and_drains, beliefs_negatives_take_up_too_much_space,
+         beliefs_negatives_promote_wildfires, beliefs_negatives_attract_undesirable_animals, 
+         beliefs_extra_negative_make_me_feel_stressed)
+
+
+long_neg_edu <- pivot_longer(mtl_neg_edu, cols = starts_with("beliefs_"), names_to = "question", values_to = "response") %>%
+  mutate(question = case_when(question == "beliefs_negatives_block_the_visibility_of_road_signs" ~ "block visibility",
+                              question == "beliefs_negatives_damage_property_including_concrete_paths_and_powerlines" ~ "damage property",
+                              question == "beliefs_negatives_create_mess" ~ "messy",
+                              question == "beliefs_negatives_are_ugly" ~ "ugly",
+                              question == "beliefs_negatives_use_too_much_water" ~ "use too much water",
+                              question == "beliefs_negatives_block_water_pipes_and_drains" ~ "block pipes",
+                              question == "beliefs_negatives_take_up_too_much_space" ~ "take up too much space",
+                              question == "beliefs_negatives_promote_wildfires" ~ "promote wildfires",
+                              question == "beliefs_negatives_attract_undesirable_animals" ~ "attract undesirable animals",
+                              question == "beliefs_extra_negative_make_me_feel_stressed" ~ "stressful"),
+         
+         edu = case_when(edu == 0 ~ "N/A",
+                         edu == 1 ~ "No High School",
+                         edu == 2 ~ "High School",
+                         edu == 3 ~ "Trade School",
+                         edu == 4 ~ "Bac",
+                         edu == 5 ~ "Masters",
+                         edu == 6 ~ "Doc"))
+
+make_boxplot(long_neg_edu, long_neg_edu$edu, c("No High School", "High School", "Trade School", "Bac", "Masters", "Doc", "N/A"), c("#c2d6a4", "#9cc184", "#669d62", "#3c7c3d", "#1f5b25", "#1e3d14", "grey"))
+
+make_barplot(long_neg_edu, long_neg_edu$edu, c("No High School", "High School", "Trade School", "Bac", "Masters", "Doc", "N/A"), c("#c2d6a4", "#9cc184", "#669d62", "#3c7c3d", "#1f5b25", "#1e3d14", "grey"))
+
+```
+
+```{r}
+#| label: fig-negimm
+#| echo: FALSE
+#| eval: TRUE
+#| warning: FALSE
+#| fig-subcap: 
+#|   - Boxplot showing questions (x-axis) where country of origin is significantly associated to the question. Response levels in terms of "agreement" are on y-axis. 
+#|   - Barplot with each panel showing a distinct question where country of origin is significatly associated to the question. X-axis denotes the level of agreement respondents gave with the question and y-axis is counts for each level. Bar plots are split in proportion of each country of origin option.
+
+mtl_neg_imm <- mtl_clean %>% 
+  select(immigrant, beliefs_negatives_block_the_visibility_of_road_signs, 
+         beliefs_negatives_damage_property_including_concrete_paths_and_powerlines,
+         beliefs_negatives_create_mess, beliefs_negatives_are_ugly, beliefs_negatives_use_too_much_water,
+         beliefs_negatives_are_expensive_to_maintain, beliefs_negatives_take_up_too_much_space,
+         beliefs_negatives_promote_wildfires, beliefs_negatives_attract_undesirable_animals, 
+         beliefs_extra_negative_make_me_feel_stressed)
+
+long_neg_imm <- pivot_longer(mtl_neg_imm, cols = starts_with("beliefs_"), names_to = "question", values_to = "response") %>%
+  mutate(question = case_when(question == "beliefs_negatives_block_the_visibility_of_road_signs" ~ "block visibility",
+                              question == "beliefs_negatives_damage_property_including_concrete_paths_and_powerlines" ~ "damage property",
+                              question == "beliefs_negatives_create_mess" ~ "messy",
+                              question == "beliefs_negatives_are_ugly" ~ "ugly",
+                              question == "beliefs_negatives_use_too_much_water" ~ "use too much water",
+                              question == "beliefs_negatives_are_expensive_to_maintain" ~ "expensive",
+                              question == "beliefs_negatives_take_up_too_much_space" ~ "take up too much space",
+                              question == "beliefs_negatives_promote_wildfires" ~ "promote wildfires",
+                              question == "beliefs_negatives_attract_undesirable_animals" ~ "attract undesirable animals",
+                              question == "beliefs_extra_negative_make_me_feel_stressed" ~ "stressful"),
+         immigrant = case_when(immigrant == 1 ~ "Born Canadian, Parents Born Canadian",
+                               immigrant == 2 ~ "Born Canadian, Parents Born Abroad", 
+                               immigrant == 3 ~ "Born Abroad"))
+
+
+make_boxplot(long_neg_imm, long_neg_imm$immigrant, c("Born Canadian, Parents Born Canadian", "Born Canadian, Parents Born Abroad", "Born Abroad"), c("#c2d6a4", "#669d62", "#192813"))
+
+make_barplot(long_neg_imm, long_neg_imm$immigrant, c("Born Canadian, Parents Born Canadian", "Born Canadian, Parents Born Abroad", "Born Abroad"), c("#c2d6a4", "#669d62", "#192813"))
+```
+
+```{r}
+#| label: fig-neglang
+#| echo: FALSE
+#| eval: TRUE
+#| warning: FALSE
+#| fig-subcap: 
+#|   - Boxplot showing questions (x-axis) where first language is significantly associated to the question. Response levels in terms of "agreement" are on y-axis. 
+#|   - Barplot with each panel showing a distinct question where first language is significatly associated to the question. X-axis denotes the level of agreement respondents gave with the question and y-axis is counts for each level. Bar plots are split in proportion of each first language option.
+ 
+
+mtl_neg_lang <- mtl_clean %>% 
+  select(firstlanguage, beliefs_negatives_take_up_too_much_space)
+
+long_neg_lang <- pivot_longer(mtl_neg_lang, cols = starts_with("beliefs_"), names_to = "question", 
+                              values_to = "response") %>% 
+  mutate(question = case_when(question == "beliefs_negatives_take_up_too_much_space" ~ "take up too much space"),
+         firstlanguage = case_when(firstlanguage == 1 ~ "French first language",
+                                   firstlanguage == 2 ~ "English first language",
+                                   firstlanguage == 3 ~ "French preferred official language",
+                                   firstlanguage == 4 ~ "English preferred official language"))
+
+make_boxplot(long_neg_lang, long_neg_lang$firstlanguage, c("French first language", "English first language", "French preferred official language", "English preferred official language"), c("#c2d6a4", "#669d62",  "#1f5b25", "#192813"))
+
+make_barplot(long_neg_lang, long_neg_lang$firstlanguage, c("French first language", "English first language", "French preferred official language", "English preferred official language"), c("#c2d6a4", "#669d62",  "#1f5b25", "#192813"))
+
+```
+
+```{r}
+#| label: fig-negdwel
+#| echo: FALSE
+#| eval: TRUE
+#| warning: FALSE
+#| fig-subcap: 
+#|   - Boxplot showing questions (x-axis) where housing status is significantly associated to the question. Response levels in terms of "agreement" are on y-axis. 
+#|   - Barplot with each panel showing a distinct question where housing status is significatly associated to the question. X-axis denotes the level of agreement respondents gave with the question and y-axis is counts for each level. Bar plots are split in proportion of each housing status.
+mtl_neg_dwel <- mtl_clean %>% 
+  select(housing_code, beliefs_negatives_are_ugly, beliefs_negatives_block_water_pipes_and_drains,
+         beliefs_negatives_promote_wildfires)
+
+long_neg_dwel <- pivot_longer(mtl_neg_dwel, cols = starts_with("beliefs_"), names_to = "question", values_to = "response") %>% 
+  mutate(question = case_when(question == "beliefs_negatives_are_ugly" ~ "ugly",
+                              question == "beliefs_negatives_block_water_pipes_and_drains" ~ "block pipes",
+                              question == "beliefs_negatives_promote_wildfires" ~ "promote wildfires"),
+         housing_code = case_when(housing_code == 1 ~ "own",
+                                  housing_code == 2 ~ "rent",
+                                  housing_code == 3 ~ "other"))
+
+make_boxplot(long_neg_dwel, long_neg_dwel$housing_code, c("own", "rent", "other"), c("#c2d6a4", "#669d62", "#192813"))
+
+make_barplot(long_neg_dwel, long_neg_dwel$housing_code, c("own", "rent", "other"), c("#c2d6a4", "#669d62", "#192813"))
+```
+
+```{r}
+#| label: fig-negdweltyp
+#| echo: FALSE
+#| eval: TRUE
+#| warning: FALSE
+#| fig-subcap: 
+#|   - Boxplot showing questions (x-axis) where dwelling type is significantly associated to the question. Response levels in terms of "agreement" are on y-axis. 
+#|   - Barplot with each panel showing a distinct question where dwelling type is significatly associated to the question. X-axis denotes the level of agreement respondents gave with the question and y-axis is counts for each level. Bar plots are split in proportion of each dwelling type.
+
+mtl_neg_dtype <- mtl_clean %>% 
+  select(housing_type_of_dwelling,    
+         beliefs_negatives_damage_property_including_concrete_paths_and_powerlines,
+         beliefs_negatives_create_mess, beliefs_negatives_are_ugly, beliefs_negatives_block_the_sun,
+         beliefs_negatives_block_water_pipes_and_drains, beliefs_negatives_take_up_too_much_space,
+         beliefs_negatives_promote_wildfires, beliefs_negatives_attract_undesirable_animals, 
+         beliefs_extra_negative_make_me_feel_stressed)
+
+
+long_neg_dtype <- pivot_longer(mtl_neg_dtype, cols = starts_with("beliefs_"), names_to = "question", values_to = "response") %>%
+  mutate(question = case_when(question == "beliefs_negatives_damage_property_including_concrete_paths_and_powerlines" ~ "damage property",
+                              question == "beliefs_negatives_create_mess" ~ "messy",
+                              question == "beliefs_negatives_are_ugly" ~ "ugly",
+                              question == "beliefs_negatives_block_the_sun" ~ "block sun",
+                              question == "beliefs_negatives_block_water_pipes_and_drains" ~ "block pipes",
+                              question == "beliefs_negatives_take_up_too_much_space" ~ "take up too much space",
+                              question == "beliefs_negatives_promote_wildfires" ~ "promote wildfires",
+                              question == "beliefs_negatives_attract_undesirable_animals" ~ "attract undesirable animals",
+                              question == "beliefs_extra_negative_make_me_feel_stressed" ~ "stressful"),
+         
+         housing_type_of_dwelling = case_when(housing_type_of_dwelling == 1 ~ "House",
+                         housing_type_of_dwelling == 2 ~ "Apartment in House",
+                         housing_type_of_dwelling == 3 ~ "Apartment in Building",
+                         housing_type_of_dwelling == 4 ~ "Other",
+                         housing_type_of_dwelling == 5 ~ "N/A"))
+
+make_boxplot(long_neg_dtype, long_neg_dtype$housing_type_of_dwelling, c("House", "Apartment in House", "Apartment in Building", "Other", "N/A"), c("#c2d6a4", "#669d62", "#3c7c3d", "#1e3d14", "grey"))
+
+make_barplot(long_neg_dtype, long_neg_dtype$housing_type_of_dwelling, c("House", "Apartment in House", "Apartment in Building", "Other", "N/A"), c("#c2d6a4", "#669d62", "#3c7c3d", "#1e3d14", "grey"))
+
+```
+
+```{r}
+#| label: fig-citytype
+#| echo: FALSE
+#| eval: TRUE
+#| warning: FALSE
+#| fig-subcap: 
+#|   - Boxplot showing questions (x-axis) where city type is significantly associated to the question. Response levels in terms of "agreement" are on y-axis. 
+#|   - Barplot with each panel showing a distinct question where city type is significatly associated to the question. X-axis denotes the level of agreement respondents gave with the question and y-axis is counts for each level. Bar plots are split in proportion of each city type.
+
+mtl_neg_ctype <- mtl_clean %>% 
+  select(city_type, beliefs_negatives_attract_undesirable_animals)
+
+
+long_neg_ctype <- pivot_longer(mtl_neg_ctype, cols = starts_with("beliefs_"), names_to = "question", values_to = "response") %>%
+  mutate(question = case_when(question == "beliefs_negatives_attract_undesirable_animals" ~ "attract undesirable animals"),
+         
+         city_type = case_when(city_type == 1 ~ "inner",
+                         city_type == 2 ~ "middle",
+                         city_type == 3 ~ "outer",
+                         city_type == 4 ~ "regional"))
+
+make_boxplot(long_neg_ctype, long_neg_ctype$city_type, c("inner", "middle", "outer", "regional"), c("#c2d6a4", "#669d62",  "#1f5b25", "#192813"))
+
+make_barplot(long_neg_ctype, long_neg_ctype$city_type, c("inner", "middle", "outer", "regional"), c("#c2d6a4", "#669d62",  "#1f5b25", "#192813"))
+
+```
+
+
 ------------------------------------------------------------------------
 
-### Tree Beliefs(Positive)
+### Tree Beliefs (Positive)
 
 There are 13 questions that we asked survey respondents regarding their positive beliefs about urban trees. They are as follows (~~strikethrough~~ indicates no significant relationship with any of our independent variable, significant relationships will be visualized below):
 
