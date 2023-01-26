@@ -9,6 +9,7 @@ format:
 ---
 
 ```{r}
+#| label: setup
 #| echo: FALSE
 #| eval: TRUE
 #| warning: FALSE
@@ -24,8 +25,6 @@ source("R/make_barplot.R")
 mtl_clean <- tar_read(mtl_clean)
 
 ```
-
-
 
 ### Background
 
@@ -72,6 +71,7 @@ The variables selected: country of origin, preferred language, dwelling type, an
 -   Without adding street tree cover, we can measure the *total effect* of sociodemographics on people's values/beliefs (this includes the unmeasured effect of the influence of street tree cover on their values/beliefs). If we choose to add street tree cover, we can measure the *direct effect* of sociodemographics on people's values and beliefs by controlling for street tree cover.
 
 ```{dot}
+//| label: DAG
 //| fig-width: 8
 //| fig-align: center
 digraph G {
@@ -139,12 +139,16 @@ How important to you are each of the following things about these trees
 
 -   maintain Indigenous or European cultures
 
+Each independent variable that was significantly associated with one or more of the questions is visualized in both a boxplot and barplot below.
+
 ```{r}
+#| label: fig-valueedu
 #| echo: FALSE
 #| eval: TRUE
 #| warning: FALSE
-#| fig-cap: Fig 1. Questions regarding values of trees that varied significantly with level of education 
-
+#| fig-subcap: 
+#|   - Fig 1a. Boxlot showing questions (x-axis) where education level is significantly associated to the question. Response levels in terms of "agreement" are on y-axis. 
+#|   - Fig 1b. Barplot with each panel showing a distinct question where education level is significatly associated to the question. X-axis denotes the level of agreement respondents gave with the question and y-axis is counts for each level. Bar plots are split in proportion of each education level.
 
 mtl_val_edu <- mtl_clean %>% 
   select(edu, uf_vals_large_old_trees, uf_vals_learning_about_cultural_traditions,
@@ -179,11 +183,13 @@ make_barplot(long_val_edu, long_val_edu$edu, c("No High School", "High School", 
 ```
 
 ```{r}
+#| label: fig-valueimm
 #| echo: FALSE
 #| eval: TRUE
 #| warning: FALSE
-#| fig-cap: Fig 2. Questions regarding values of trees that varied significantly with country of origin
-
+#| fig-subcap: 
+#|   - Fig 2a. Boxlot showing questions (x-axis) where country of origin is significantly associated to the question. Response levels in terms of "agreement" are on y-axis. 
+#|   - Fig 2b. Barplot with each panel showing a distinct question where country of origin is significatly associated to the question. X-axis denotes the level of agreement respondents gave with the question and y-axis is counts for each level. Bar plots are split in proportion of each country of origin option.
 
 mtl_val_imm <- mtl_clean %>% 
   select(immigrant, uf_vals_large_old_trees,
@@ -202,12 +208,14 @@ make_boxplot(long_val_imm, long_val_imm$immigrant, c("Born Canadian, Parents Bor
 make_barplot(long_val_imm, long_val_imm$immigrant, c("Born Canadian, Parents Born Canadian", "Born Canadian, Parents Born Abroad", "Born Abroad"), c("#c2d6a4", "#669d62", "#192813"))
 ```
 
-
 ```{r}
+#| label: fig-valuelang
 #| echo: FALSE
 #| eval: TRUE
 #| warning: FALSE
-#| fig-cap: Fig 3. Questions regarding values of trees that varied significantly with first language (CODING ERROR)
+#| fig-subcap: 
+#|   - Fig 3a. Boxlot showing questions (x-axis) where first language is significantly associated to the question. Response levels in terms of "agreement" are on y-axis. 
+#|   - Fig 3b. Barplot with each panel showing a distinct question where first language is significatly associated to the question. X-axis denotes the level of agreement respondents gave with the question and y-axis is counts for each level. Bar plots are split in proportion of each first language option.
  
 
 mtl_val_lang <- mtl_clean %>% 
@@ -234,11 +242,13 @@ make_barplot(long_val_lang, long_val_lang$firstlanguage, c("French first languag
 ```
 
 ```{r}
+#| label: fig-valuedwel
 #| echo: FALSE
 #| eval: TRUE
 #| warning: FALSE
-#| fig-cap: Fig 4. Questions regarding values of trees that varied significantly with dwelling status
-
+#| fig-subcap: 
+#|   - Fig 4a. Boxlot showing questions (x-axis) where housing status is significantly associated to the question. Response levels in terms of "agreement" are on y-axis. 
+#|   - Fig 4b. Barplot with each panel showing a distinct question where housing status is significatly associated to the question. X-axis denotes the level of agreement respondents gave with the question and y-axis is counts for each level. Bar plots are split in proportion of each housing status.
 mtl_val_dwel <- mtl_clean %>% 
   select(housing_code, uf_vals_maintaining_aboriginal_or_european_culture)
 
@@ -253,22 +263,26 @@ make_boxplot(long_val_dwel, long_val_dwel$housing_code, c("own", "rent", "other"
 make_barplot(long_val_dwel, long_val_dwel$housing_code, c("own", "rent", "other"), c("#c2d6a4", "#669d62", "#192813"))
 ```
 
-
 ------------------------------------------------------------------------
 
-**Tree Beliefs (Negative)**
+### Tree Beliefs (Negative)
 
-
-
-------------------------------------------------------------------------
-
-**Tree Beliefs(Positive)**
 
 
 ------------------------------------------------------------------------
 
-**Explanatories**
+### Tree Beliefs(Positive)
+
+
 
 ------------------------------------------------------------------------
 
 ### Next Steps
+
+1.  All decide if we want a meeting to discuss progress so far/next steps/etc.
+
+2.  Hiên and Emile consult if the variables selected make sense, and if so, what our predictions are
+
+3.  All decide if we want to incorporate street tree cover into the model
+
+4.  Bella finalizes models + finds better way to visualize/present outputs
