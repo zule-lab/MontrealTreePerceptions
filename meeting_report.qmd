@@ -8,6 +8,25 @@ format:
     embed-resources: true
 ---
 
+```{r}
+#| echo: FALSE
+#| eval: TRUE
+#| warning: FALSE
+
+library(targets)
+library(ggplot2)
+library(tidyr)
+library(dplyr)
+
+source("R/make_boxplot.R")
+source("R/make_barplot.R")
+
+mtl_clean <- tar_read(mtl_clean)
+
+```
+
+
+
 ### Background
 
 We want to explore how people's perceptions of urban trees varies with their sociodemographics. Specifically, we want to dig deeper into understanding people's perceptions in *Montréal*. We want to use the survey data to ask more pointed and meaningful questions about Montréal specifically (e.g., examine the issue of language).
@@ -127,19 +146,13 @@ How important to you are each of the following things about these trees
 #| fig-cap: Fig 1. Questions regarding values of trees that varied significantly with level of education 
 
 
-library(targets)
-library(ggplot2)
-library(tidyr)
-library(dplyr)
-
-mtl_clean <- tar_read(mtl_clean)
-
 mtl_val_edu <- mtl_clean %>% 
   select(edu, uf_vals_large_old_trees, uf_vals_learning_about_cultural_traditions,
          uf_vals_clean_air_clean_water_and_healthy_cities, uf_vals_make_the_city_more_welcoming,
          uf_vals_a_more_liveable_city, uf_vals_improving_community_cohesion,
          uf_vals_beautiful_sights_sounds_and_smells,
          uf_vals_maintaining_aboriginal_or_european_culture)
+
 
 long_val_edu <- pivot_longer(mtl_val_edu, cols = starts_with("uf_vals"), names_to = "question", values_to = "response") %>%
   mutate(question = case_when(question == "uf_vals_large_old_trees" ~ "large old trees",
@@ -159,15 +172,9 @@ long_val_edu <- pivot_longer(mtl_val_edu, cols = starts_with("uf_vals"), names_t
                          edu == 5 ~ "Masters",
                          edu == 6 ~ "Doc"))
 
-ggplot(long_val_edu, aes(question, response)) + 
-  geom_boxplot(outlier.shape = NA) + 
-  geom_jitter(aes(color = edu), alpha = 0.7, size = 0.5, width =0.25) + 
-  theme_classic() + 
-  labs(x = NULL, y = NULL, color = NULL) + 
-  scale_colour_manual(breaks = c("No High School", "High School", "Trade School", "Bac", "Masters", "Doc", "N/A"), values = c("#c2d6a4", "#9cc184", "#669d62", "#3c7c3d", "#1f5b25", "#1e3d14", "#192813")) + 
-  theme(axis.text.x = element_text(angle = 45, hjust = 1),
-        axis.text = element_text(size=14),
-        legend.text = element_text(size =14))
+make_boxplot(long_val_edu, long_val_edu$edu, c("No High School", "High School", "Trade School", "Bac", "Masters", "Doc", "N/A"), c("#c2d6a4", "#9cc184", "#669d62", "#3c7c3d", "#1f5b25", "#1e3d14", "grey"))
+
+make_barplot(long_val_edu, long_val_edu$edu, c("No High School", "High School", "Trade School", "Bac", "Masters", "Doc", "N/A"), c("#c2d6a4", "#9cc184", "#669d62", "#3c7c3d", "#1f5b25", "#1e3d14", "grey"))
 
 ```
 
@@ -189,15 +196,10 @@ long_val_imm <- pivot_longer(mtl_val_imm, cols = starts_with("uf_vals"), names_t
                                immigrant == 2 ~ "Born Canadian, Parents Born Abroad", 
                                immigrant == 3 ~ "Born Abroad"))
 
-ggplot(long_val_imm, aes(question, response)) + 
-  geom_boxplot(outlier.shape = NA) + 
-  geom_jitter(aes(color = immigrant), alpha = 0.7, size = 0.5, width =0.25) + 
-  theme_classic() +
-  labs(x = NULL, y = NULL, color = NULL) + 
-  scale_colour_manual(breaks = c("Born Canadian, Parents Born Canadian", "Born Canadian, Parents Born Abroad", "Born Abroad"), values = c("#1f5b25", "#1e3d14", "#192813")) + 
-  theme(axis.text.x = element_text(angle = 45, hjust = 1),
-        axis.text = element_text(size=14),
-        legend.text = element_text(size =14))
+
+make_boxplot(long_val_imm, long_val_imm$immigrant, c("Born Canadian, Parents Born Canadian", "Born Canadian, Parents Born Abroad", "Born Abroad"), c("#c2d6a4", "#669d62", "#192813"))
+
+make_barplot(long_val_imm, long_val_imm$immigrant, c("Born Canadian, Parents Born Canadian", "Born Canadian, Parents Born Abroad", "Born Abroad"), c("#c2d6a4", "#669d62", "#192813"))
 ```
 
 
@@ -225,15 +227,10 @@ long_val_lang <- pivot_longer(mtl_val_lang, cols = starts_with("uf_vals"), names
                                    firstlanguage == 3 ~ "French preferred official language",
                                    firstlanguage == 4 ~ "English preferred official language"))
 
-ggplot(long_val_lang, aes(question, response)) + 
-  geom_boxplot(outlier.shape = NA) + 
-  geom_jitter(aes(color = firstlanguage), alpha = 0.7, size = 0.5, width =0.25) + 
-  theme_classic() +
-  labs(x = NULL, y = NULL, color = NULL) + 
-  scale_colour_manual(breaks = c("French first language", "English first language", "French preferred official language", "English preferred official language"), values = c("#3c7c3d", "#1f5b25", "#1e3d14", "#192813")) + 
-  theme(axis.text.x = element_text(angle = 45, hjust = 1),
-        axis.text = element_text(size=14),
-        legend.text = element_text(size =14))
+make_boxplot(long_val_lang, long_val_lang$firstlanguage, c("French first language", "English first language", "French preferred official language", "English preferred official language"), c("#c2d6a4", "#669d62",  "#1f5b25", "#192813"))
+
+make_barplot(long_val_lang, long_val_lang$firstlanguage, c("French first language", "English first language", "French preferred official language", "English preferred official language"), c("#c2d6a4", "#669d62",  "#1f5b25", "#192813"))
+
 ```
 
 ```{r}
@@ -251,25 +248,24 @@ long_val_dwel <- pivot_longer(mtl_val_dwel, cols = starts_with("uf_vals"), names
                                   housing_code == 2 ~ "rent",
                                   housing_code == 3 ~ "other"))
 
-ggplot(long_val_dwel, aes(question, response)) + 
-  geom_boxplot(outlier.shape = NA) + 
-  geom_jitter(aes(color = housing_code), alpha = 0.7, size = 0.5, width =0.25) + 
-  theme_classic() +
-  labs(x = NULL, y = NULL, color = NULL) + 
-  scale_colour_manual(breaks = c("own", "rent", "other"), values = c("#1f5b25", "#1e3d14", "#192813")) + 
-  theme(axis.text.x = element_text(angle = 45, hjust = 1),
-        axis.text = element_text(size=14),
-        legend.text = element_text(size=14))
+make_boxplot(long_val_dwel, long_val_dwel$housing_code, c("own", "rent", "other"), c("#c2d6a4", "#669d62", "#192813"))
+
+make_barplot(long_val_dwel, long_val_dwel$housing_code, c("own", "rent", "other"), c("#c2d6a4", "#669d62", "#192813"))
 ```
 
+
+------------------------------------------------------------------------
 
 **Tree Beliefs (Negative)**
 
 
 
+------------------------------------------------------------------------
+
 **Tree Beliefs(Positive)**
 
 
+------------------------------------------------------------------------
 
 **Explanatories**
 
