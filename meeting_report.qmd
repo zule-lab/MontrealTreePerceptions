@@ -267,13 +267,50 @@ make_barplot(long_val_dwel, long_val_dwel$housing_code, c("own", "rent", "other"
 
 ### Tree Beliefs (Negative)
 
+There are 14 questions that we asked survey respondents regarding their negative beliefs about urban trees. They are as follows (significant relationships will be visualized below):
 
+How much do you agree that trees in your city or neighbourhood
+
+-   cause allergies
+-   block the visibility of road signs
+-   damage property including concrete paths and power lines
+-   create mess
+-   are ugly
+-   use too much water
+-   block water pipes and drains
+-   block the sun
+-   are expensive to maintain
+-   drop branches
+-   take up too much space
+-   promote wildfires
+-   attract undesirable animals
+-   make me feel stressed
+
+Each independent variable that was significantly associated with one or more of the questions is visualized in both a boxplot and barplot below.
 
 ------------------------------------------------------------------------
 
 ### Tree Beliefs(Positive)
 
+There are 13 questions that we asked survey respondents regarding their positive beliefs about urban trees. They are as follows (~~strikethrough~~ indicates no significant relationship with any of our independent variable, significant relationships will be visualized below):
 
+How much do you agree that trees in your city or neighbourhood
+
+-   attract desirable animals
+-   screen unattractive views
+-   make streets and parks safer
+-   are calming
+-   clean the air
+-   provide shade
+-   produce oxygen
+-   cool the neighbourhood
+-   reduce flooding
+-   make a place good for shopping
+-   increase property value
+-   are spiritual
+-   make me feel healthy
+
+Each independent variable that was significantly associated with one or more of the questions is visualized in both a boxplot and barplot below.
 
 ------------------------------------------------------------------------
 
