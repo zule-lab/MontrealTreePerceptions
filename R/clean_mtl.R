@@ -29,7 +29,7 @@ clean_mtl <- function(mtl_raw){
                             canborn %in% 0 & canborn_par %in% 1 ~ 4 # foreign born Canadian
                             ),
       
-      firstlanguage = case_when(esl %in% 1 & language_french_spoken %in% 0 ~ 1, # french first language
+      firstlanguage = case_when(esl %in% 1 & language_french_spoken %in% 1 ~ 1, # french first language
                                 esl %in% 0 ~ 2, # english first language
                                 esl %in% 1 & language_french_spoken %in% 0 & french_yes_1_1 %in% 1 ~ 3, # french second language
                                 esl %in% 1 & language_french_spoken %in% 0 & french_yes_1_1 %in% 0 ~ 4# english second language
