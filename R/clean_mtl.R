@@ -5,7 +5,7 @@ clean_mtl <- function(mtl_raw){
   mtl_sel <- mtl_cols %>% 
     select(c(id, recorded_date, location_latitude, location_longitude, postcode, language, in_which_city_or_municipal_boundary_do_you_live_in,
              starts_with("uf_vals"), starts_with("beliefs"), city_type, housing_code, housing_type_of_dwelling, 
-             canborn, canborn_par, esl, french_yes_1_1, language_french_spoken, edu))
+             canborn, canborn_par, esl, language, language_french_spoken, edu))
   
   mtl_code <- mtl_sel %>%
     mutate(
@@ -31,8 +31,8 @@ clean_mtl <- function(mtl_raw){
       
       firstlanguage = case_when(esl %in% 1 & language_french_spoken %in% 1 ~ 1, # french first language
                                 esl %in% 0 ~ 2, # english first language
-                                esl %in% 1 & language_french_spoken %in% 0 & french_yes_1_1 %in% 1 ~ 3, # french second language
-                                esl %in% 1 & language_french_spoken %in% 0 & french_yes_1_1 %in% 0 ~ 4# english second language
+                                esl %in% 1 & language_french_spoken %in% 0 & language %in% "French" ~ 3, # french second language
+                                esl %in% 1 & language_french_spoken %in% 0 & language %in% "English" ~ 4# english second language
                                 ) 
       
       # edu: 0 = prefer not to answer, 1 = did not complete high school, 2 = high school, 3 = trade school, 4 = bac, 5 = masters, 6 = doc

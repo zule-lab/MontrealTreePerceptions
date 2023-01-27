@@ -719,3 +719,6 @@ make_barplot(long_pos_ctype, long_pos_ctype$city_type, c("inner", "middle", "out
 4.  All decide if we want to incorporate street tree cover into the model
 
 5.  Bella finalizes models + finds better way to visualize/present outputs
+
+
+*NOTE:* In the survey, the question asked is "Do you speak any language other than English at home? If yes, please specify". For people that answered no, I have coded them as "English first language". For those who answered yes and responded with only french, I have coded them as "French first language". For those who answered yes, specified a language other than French or English, I identified what language they answered the survey in and coded them as "English preferred official language" or "French preferred official language". I don't know if this is appropriate, I don't want to center English and French as the only important/interesting languages, and can add more levels to this variable, but am unsure of the best way to do this, especially for people who responded with multiple languages as the language they speak at home. I would love everyone's thoughts on this issue.

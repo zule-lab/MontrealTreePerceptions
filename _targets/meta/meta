@@ -1,13 +1,13 @@
 name|type|data|command|depend|seed|path|time|size|bytes|format|repository|iteration|parent|children|seconds|warnings|error
-.Random.seed|object|a6c830c118f537c6|||||||||||||||
-clean_mtl|function|1b783a06046affbd|||||||||||||||
+.Random.seed|object|95280b90283d021e|||||||||||||||
+clean_mtl|function|785f903767071fc4|||||||||||||||
 clean_mtl_eng|function|194bfb15417d3c2a|||||||||||||||
 clean_mtl_fre|function|234b73cdb59d6d12|||||||||||||||
 cohesion_mod|stem|f1e867ae7212ce37|c6762f377d0c4d13|69c358f95ad10ffd|-805658098||t19373.8701959631s||153189|qs|local|vector|||0.02||lavaan ERROR some observed variables specified in the model are not found in the dataset social_cohesion_new_1_help_neighbors social_cohesion_new_2_close_knit_neighborhood social_cohesion_new_3_neighborhood_trust social_cohesion_new_4_negative_people_don_t_get_along_reversed social_cohesion_new_5_negative_do_not_share_values_reverse years_neigh years_urban decade gender_f
 make_barplot|function|ca65b2b8a8ce3904|||||||||||||||
 make_boxplot|function|8692199fa28382a6|||||||||||||||
-meeting_report|stem|5799e67b2d34b2ee|d4f5d6eda5f5c326|56af296048301510|-577404127|meeting_report.html*meeting_report.qmd|t19384.697261503s|185d944ee8ba40a2|6329694|file|local|vector|||34.75||
-mtl_clean|stem|1e973c8eee62ab40|728cbda271df4b5d|17f793080799cee3|870587379||t19384.6967986921s|a353afec180d1ec5|65652|qs|local|vector|||0.16||
+meeting_report|stem|80cb633ab972d8df|d4f5d6eda5f5c326|9790f7c6a4dcbaf1|-577404127|meeting_report.html*meeting_report.qmd|t19384.7020281549s|656953f1a1ad43d4|6315986|file|local|vector|||35.11||
+mtl_clean|stem|41353ec9bc71a074|728cbda271df4b5d|c4a2b1a53bab1ec4|870587379||t19384.7015623688s|a651e40335fb3d78|65331|qs|local|vector|||0.17||
 mtl_eng_clean|stem|bcd26395eb46b531|6efc8411502986c3|e0acf738c0cd7d10|1074184863||t19368.8069696458s|05ae09ecf197eccf|102587|qs|local|vector|||0.573||
 mtl_eng_raw|stem|ff295d1f536f1d22|567676048423ced8|94dc8e61a1f12e61|1155880378||t19367.8386893672s|48ff0059130761bf|154068|qs|local|vector|||0.099||
 mtl_eng_raw_file|stem|89f690bf35429dc5|7df3ab313a1dcdd7|ef46db3751d8e999|643787329|input/survey/UrbanForestCommunitySurvey_Montreal_ENG_corrected.csv|t19367.8373862034s|010dce61eaaf7f6f|775338|file|local|vector|||0.002||
@@ -16,7 +16,7 @@ mtl_fre_raw|stem|3eef266a7b4b7a33|88151be4c9d00138|77d6f983565ff53d|1238921695||
 mtl_fre_raw_file|stem|f1fe606b7c600ce9|108872bda093887c|ef46db3751d8e999|44426204|input/survey/UrbanForestCommunitySurvey_Montreal_FRE_corrected.csv|t19367.8680298477s|409dae222b9878f6|953006|file|local|vector|||0.002||
 mtl_raw|stem|c7fa11d19eb18584|e9ec0883c3f80ce1|3f1696a208a5f8c5|-2050430421||t19384.663845816s|14e54a67311d7448|328719|qs|local|vector|||0.09||
 mtl_raw_file|stem|538f073b9f7edaeb|ea738f1a37788f4d|ef46db3751d8e999|1513051185|input/survey/Montreal_cleaned.csv|t19373.810122391s|fb33041fc13c0e92|1520134|file|local|vector|||0||
-negbeliefs_mod|stem|2bfcd7edebddaf10|917bfcbe4d7dda9e|1c9dc0b0a3e4f47e|99669365||t19384.6974065624s|1a9e0683778c5628|843338|qs|local|vector|||5.11||
-posbeliefs_mod|stem|f6bca8cae49bb903|f5656234e4cd94a7|1c9dc0b0a3e4f47e|-2077530034||t19384.6968595711s|74efbf087ca80468|840209|qs|local|vector|||5.25||
+negbeliefs_mod|stem|e02f9cdf87fefb4e|917bfcbe4d7dda9e|4414059084369861|99669365||t19384.7021741979s|44dab15802b67caf|843349|qs|local|vector|||5.16||
+posbeliefs_mod|stem|9492ce4d960702eb|f5656234e4cd94a7|4414059084369861|-2077530034||t19384.7016221236s|cde621ad89d4c9f7|840218|qs|local|vector|||5.14||
 targets_input|object|5d2614a3cf439ac2|||||||||||||||
-values_mod|stem|d26ec8845af0fc33|b07643ec3b6d858f|1c9dc0b0a3e4f47e|-1259225585||t19384.6973472978s|f7b072a5c4376545|1184631|qs|local|vector|||7.35||
+values_mod|stem|7d59587e86804621|b07643ec3b6d858f|4414059084369861|-1259225585||t19384.7021144212s|368b355db0c62c24|1184651|qs|local|vector|||7.39||
