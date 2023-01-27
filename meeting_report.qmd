@@ -464,7 +464,7 @@ make_barplot(long_neg_dtype, long_neg_dtype$housing_type_of_dwelling, c("House",
 ```
 
 ```{r}
-#| label: fig-citytype
+#| label: fig-negcitytype
 #| echo: FALSE
 #| eval: TRUE
 #| warning: FALSE
@@ -500,7 +500,7 @@ There are 13 questions that we asked survey respondents regarding their positive
 How much do you agree that trees in your city or neighbourhood
 
 -   attract desirable animals
--   screen unattractive views
+-   ~~screen unattractive views~~
 -   make streets and parks safer
 -   are calming
 -   clean the air
@@ -515,14 +515,207 @@ How much do you agree that trees in your city or neighbourhood
 
 Each independent variable that was significantly associated with one or more of the questions is visualized in both a boxplot and barplot below.
 
+```{r}
+#| label: fig-posedu
+#| echo: FALSE
+#| eval: TRUE
+#| warning: FALSE
+#| fig-subcap: 
+#|   - Boxplot showing questions (x-axis) where education level is significantly associated to the question. Response levels in terms of "agreement" are on y-axis. 
+#|   - Barplot with each panel showing a distinct question where education level is significatly associated to the question. X-axis denotes the level of agreement respondents gave with the question and y-axis is counts for each level. Bar plots are split in proportion of each education level.
+
+mtl_pos_edu <- mtl_clean %>% 
+  select(edu, beliefs_positives_are_calming, beliefs_positives_clean_the_air, beliefs_positives_provide_shade, 
+         beliefs_positives_cool_the_neighborhood, beliefs_positives_reduce_flooding, beliefs_positives_make_a_place_good_for_shopping,
+         beliefs_positives_increase_property_values, beliefs_extra_positive_make_me_feel_healthy)
+
+
+long_pos_edu <- pivot_longer(mtl_pos_edu, cols = starts_with("beliefs_"), names_to = "question", values_to = "response") %>%
+  mutate(question = case_when(question == "beliefs_positives_are_calming" ~ "calming",
+                              question == "beliefs_positives_clean_the_air" ~ "clean air",
+                              question == "beliefs_positives_provide_shade" ~ "provide shade",
+                              question == "beliefs_positives_cool_the_neighborhood" ~ "cool the neighbourhood",
+                              question == "beliefs_positives_reduce_flooding" ~ "reduce flooding",
+                              question == "beliefs_positives_make_a_place_good_for_shopping" ~ "facilitate shopping",
+                              question == "beliefs_positives_increase_property_values" ~ "increase property values",
+                              question == "beliefs_extra_positive_make_me_feel_healthy" ~ "make me feel healthy"),
+         
+         edu = case_when(edu == 0 ~ "N/A",
+                         edu == 1 ~ "No High School",
+                         edu == 2 ~ "High School",
+                         edu == 3 ~ "Trade School",
+                         edu == 4 ~ "Bac",
+                         edu == 5 ~ "Masters",
+                         edu == 6 ~ "Doc"))
+
+make_boxplot(long_pos_edu, long_pos_edu$edu, c("No High School", "High School", "Trade School", "Bac", "Masters", "Doc", "N/A"), c("#c2d6a4", "#9cc184", "#669d62", "#3c7c3d", "#1f5b25", "#1e3d14", "grey"))
+
+make_barplot(long_pos_edu, long_pos_edu$edu, c("No High School", "High School", "Trade School", "Bac", "Masters", "Doc", "N/A"), c("#c2d6a4", "#9cc184", "#669d62", "#3c7c3d", "#1f5b25", "#1e3d14", "grey"))
+
+```
+
+```{r}
+#| label: fig-posimm
+#| echo: FALSE
+#| eval: TRUE
+#| warning: FALSE
+#| fig-subcap: 
+#|   - Boxplot showing questions (x-axis) where country of origin is significantly associated to the question. Response levels in terms of "agreement" are on y-axis. 
+#|   - Barplot with each panel showing a distinct question where country of origin is significatly associated to the question. X-axis denotes the level of agreement respondents gave with the question and y-axis is counts for each level. Bar plots are split in proportion of each country of origin option.
+
+mtl_pos_imm <- mtl_clean %>% 
+  select(immigrant, beliefs_positives_attract_desirable_animals, beliefs_positives_are_calming, beliefs_positives_clean_the_air,
+         beliefs_positives_provide_shade, beliefs_positives_make_a_place_good_for_exercise_walk_run_cycle,
+         beliefs_positives_make_a_place_good_for_shopping, beliefs_positives_increase_property_values)
+
+long_pos_imm <- pivot_longer(mtl_pos_imm, cols = starts_with("beliefs_"), names_to = "question", values_to = "response") %>%
+  mutate(question = case_when(question == "beliefs_positives_attract_desirable_animals" ~ "attract desirable animals",
+                              question == "beliefs_positives_are_calming" ~ "calming",
+                              question == "beliefs_positives_clean_the_air" ~ "clean air",
+                              question == "beliefs_positives_provide_shade" ~ "provide shade",
+                              question == "beliefs_positives_make_a_place_good_for_exercise_walk_run_cycle" ~ "good exercise space",
+                              question == "beliefs_positives_make_a_place_good_for_shopping" ~ "facilitate shopping",
+                              question == "beliefs_positives_increase_property_values" ~ "increase property values"),
+         
+         immigrant = case_when(immigrant == 1 ~ "Born Canadian, Parents Born Canadian",
+                               immigrant == 2 ~ "Born Canadian, Parents Born Abroad", 
+                               immigrant == 3 ~ "Born Abroad"))
+
+
+make_boxplot(long_pos_imm, long_pos_imm$immigrant, c("Born Canadian, Parents Born Canadian", "Born Canadian, Parents Born Abroad", "Born Abroad"), c("#c2d6a4", "#669d62", "#192813"))
+
+make_barplot(long_pos_imm, long_pos_imm$immigrant, c("Born Canadian, Parents Born Canadian", "Born Canadian, Parents Born Abroad", "Born Abroad"), c("#c2d6a4", "#669d62", "#192813"))
+```
+
+```{r}
+#| label: fig-poslang
+#| echo: FALSE
+#| eval: TRUE
+#| warning: FALSE
+#| fig-subcap: 
+#|   - Boxplot showing questions (x-axis) where first language is significantly associated to the question. Response levels in terms of "agreement" are on y-axis. 
+#|   - Barplot with each panel showing a distinct question where first language is significatly associated to the question. X-axis denotes the level of agreement respondents gave with the question and y-axis is counts for each level. Bar plots are split in proportion of each first language option.
+ 
+
+mtl_pos_lang <- mtl_clean %>% 
+  select(firstlanguage, beliefs_positives_are_calming, beliefs_positives_make_a_place_good_for_shopping, 
+         beliefs_positives_are_spiritual)
+
+long_pos_lang <- pivot_longer(mtl_pos_lang, cols = starts_with("beliefs_"), names_to = "question", 
+                              values_to = "response") %>% 
+  mutate(question = case_when(question == "beliefs_positives_are_calming" ~ "calming",
+                              question == "beliefs_positives_make_a_place_good_for_shopping" ~ "facilitate shopping",
+                              question == "beliefs_positives_are_spiritual" ~ "are spiritual"),
+         
+         firstlanguage = case_when(firstlanguage == 1 ~ "French first language",
+                                   firstlanguage == 2 ~ "English first language",
+                                   firstlanguage == 3 ~ "French preferred official language",
+                                   firstlanguage == 4 ~ "English preferred official language"))
+
+make_boxplot(long_pos_lang, long_pos_lang$firstlanguage, c("French first language", "English first language", "French preferred official language", "English preferred official language"), c("#c2d6a4", "#669d62",  "#1f5b25", "#192813"))
+
+make_barplot(long_pos_lang, long_pos_lang$firstlanguage, c("French first language", "English first language", "French preferred official language", "English preferred official language"), c("#c2d6a4", "#669d62",  "#1f5b25", "#192813"))
+
+```
+
+```{r}
+#| label: fig-posdwel
+#| echo: FALSE
+#| eval: TRUE
+#| warning: FALSE
+#| fig-subcap: 
+#|   - Boxplot showing questions (x-axis) where housing status is significantly associated to the question. Response levels in terms of "agreement" are on y-axis. 
+#|   - Barplot with each panel showing a distinct question where housing status is significatly associated to the question. X-axis denotes the level of agreement respondents gave with the question and y-axis is counts for each level. Bar plots are split in proportion of each housing status.
+mtl_pos_dwel <- mtl_clean %>% 
+  select(housing_code, beliefs_positives_make_streets_and_parks_safer, beliefs_positives_provide_shade,
+         beliefs_positives_produce_oxygen, beliefs_positives_are_spiritual)
+
+long_pos_dwel <- pivot_longer(mtl_pos_dwel, cols = starts_with("beliefs_"), names_to = "question", values_to = "response") %>% 
+  mutate(question = case_when(question == "beliefs_positives_make_streets_and_parks_safer" ~ "increase safety",
+                              question == "beliefs_positives_provide_shade" ~ "provide shade",
+                              question == "beliefs_positives_are_spiritual" ~ "are spiritual"),
+         
+         housing_code = case_when(housing_code == 1 ~ "own",
+                                  housing_code == 2 ~ "rent",
+                                  housing_code == 3 ~ "other"))
+
+make_boxplot(long_pos_dwel, long_pos_dwel$housing_code, c("own", "rent", "other"), c("#c2d6a4", "#669d62", "#192813"))
+
+make_barplot(long_pos_dwel, long_pos_dwel$housing_code, c("own", "rent", "other"), c("#c2d6a4", "#669d62", "#192813"))
+```
+
+```{r}
+#| label: fig-posdweltyp
+#| echo: FALSE
+#| eval: TRUE
+#| warning: FALSE
+#| fig-subcap: 
+#|   - Boxplot showing questions (x-axis) where dwelling type is significantly associated to the question. Response levels in terms of "agreement" are on y-axis. 
+#|   - Barplot with each panel showing a distinct question where dwelling type is significatly associated to the question. X-axis denotes the level of agreement respondents gave with the question and y-axis is counts for each level. Bar plots are split in proportion of each dwelling type.
+
+mtl_pos_dtype <- mtl_clean %>% 
+  select(housing_type_of_dwelling, beliefs_positives_attract_desirable_animals, beliefs_positives_are_calming, 
+         beliefs_positives_make_a_place_good_for_exercise_walk_run_cycle, beliefs_positives_increase_property_values,
+         beliefs_extra_positive_make_me_feel_healthy)
+
+
+long_pos_dtype <- pivot_longer(mtl_pos_dtype, cols = starts_with("beliefs_"), names_to = "question", values_to = "response") %>%
+  mutate(question = case_when(question == "beliefs_positives_attract_desirable_animals" ~ "attract desirable animals",
+                              question == "beliefs_positives_are_calming" ~ "calming",
+                              question == "beliefs_positives_make_a_place_good_for_exercise_walk_run_cycle" ~ "good exercise space",
+                              question == "beliefs_positives_increase_property_values" ~ "increase property values",
+                              question == "beliefs_extra_positive_make_me_feel_healthy" ~ "make me feel healthy"),
+         
+         housing_type_of_dwelling = case_when(housing_type_of_dwelling == 1 ~ "House",
+                         housing_type_of_dwelling == 2 ~ "Apartment in House",
+                         housing_type_of_dwelling == 3 ~ "Apartment in Building",
+                         housing_type_of_dwelling == 4 ~ "Other",
+                         housing_type_of_dwelling == 5 ~ "N/A"))
+
+make_boxplot(long_pos_dtype, long_pos_dtype$housing_type_of_dwelling, c("House", "Apartment in House", "Apartment in Building", "Other", "N/A"), c("#c2d6a4", "#669d62", "#3c7c3d", "#1e3d14", "grey"))
+
+make_barplot(long_pos_dtype, long_pos_dtype$housing_type_of_dwelling, c("House", "Apartment in House", "Apartment in Building", "Other", "N/A"), c("#c2d6a4", "#669d62", "#3c7c3d", "#1e3d14", "grey"))
+
+```
+
+```{r}
+#| label: fig-poscitytype
+#| echo: FALSE
+#| eval: TRUE
+#| warning: FALSE
+#| fig-subcap: 
+#|   - Boxplot showing questions (x-axis) where city type is significantly associated to the question. Response levels in terms of "agreement" are on y-axis. 
+#|   - Barplot with each panel showing a distinct question where city type is significatly associated to the question. X-axis denotes the level of agreement respondents gave with the question and y-axis is counts for each level. Bar plots are split in proportion of each city type.
+
+mtl_pos_ctype <- mtl_clean %>% 
+  select(city_type, beliefs_positives_cool_the_neighborhood, beliefs_positives_are_spiritual)
+
+
+long_pos_ctype <- pivot_longer(mtl_pos_ctype, cols = starts_with("beliefs_"), names_to = "question", values_to = "response") %>%
+  mutate(question = case_when(question == "beliefs_positives_cool_the_neighborhood" ~ "cool the neighbourhood",
+                              question == "beliefs_positives_are_spiritual" ~ "are spiritual"),
+         
+         city_type = case_when(city_type == 1 ~ "inner",
+                         city_type == 2 ~ "middle",
+                         city_type == 3 ~ "outer",
+                         city_type == 4 ~ "regional"))
+
+make_boxplot(long_pos_ctype, long_pos_ctype$city_type, c("inner", "middle", "outer", "regional"), c("#c2d6a4", "#669d62",  "#1f5b25", "#192813"))
+
+make_barplot(long_pos_ctype, long_pos_ctype$city_type, c("inner", "middle", "outer", "regional"), c("#c2d6a4", "#669d62",  "#1f5b25", "#192813"))
+
+```
+
 ------------------------------------------------------------------------
 
 ### Next Steps
 
 1.  All decide if we want a meeting to discuss progress so far/next steps/etc.
 
-2.  Hiên and Emile consult if the variables selected make sense, and if so, what our predictions are
+2.  Hiên, Emile, and Carly consult on current methodology/variables chosen, do we agree? Should we add/remove? Code responses differently? Should we add interactions?
 
-3.  All decide if we want to incorporate street tree cover into the model
+3.  Hiên and Emile assist Bella in crafting more specific predictions
 
-4.  Bella finalizes models + finds better way to visualize/present outputs
+4.  All decide if we want to incorporate street tree cover into the model
+
+5.  Bella finalizes models + finds better way to visualize/present outputs
