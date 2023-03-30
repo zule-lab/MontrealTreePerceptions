@@ -54,9 +54,9 @@ How are Montréal residents' values and beliefs concerning urban trees influence
     -   Dwelling type (house, apartment in a house, apartment in a building, other, prefer not to answer)
     -   Education level (prefer not to answer, did not complete high school, high school, trade school, bac, masters, doc)
 
-**Justification:** People's values and beliefs concerning urban trees are inherently died to the delivery and access of ecosystem services. To effectively manage and produce ecosystem services that truly serve people, we require knowledge surrounding what people value and what drives individual differences in values. The independent variables were selected based on the variables shown to influence street tree cover in Pham et al. (2017). In addition, we are testing the effect of city type on tree values and beliefs, as there is literature showing a divide in conceptions of nature between urban and rural residents (cite).
+**Justification:** People's values and beliefs concerning urban trees are inherently tied to the delivery and access of ecosystem services. To effectively manage and produce ecosystem services that truly serve people, we require knowledge surrounding what people value and what drives individual differences in values. The independent variables were selected based on the variables shown to influence street tree cover in Pham et al. (2017). In addition, we are testing the effect of city type on tree values and beliefs, as there is literature showing a divide in conceptions of nature between urban and rural residents.
 
-**Hypothesis:** values and beliefs concerning urban trees are influenced by sociodemographics directly and indirectly through exposure to trees (i.e., amount of street tree cover in your neighbourhood).
+**Hypothesis:** values and beliefs concerning urban trees are influenced by sociodemographics directly, as well as indirectly through differing exposure to trees (i.e., amount of street tree cover in your neighbourhood).
 
 **Predictions:** would love some help from Hiên and Emile to craft some predictions for each independent variable (e.g., how do we predict level of education will influence values and beliefs concerning urban trees?). I am happy to craft them together but I think the social science expertise offered by Hiên and Emile will strengthen the predictions a lot.
 
@@ -100,6 +100,7 @@ digraph G {
     -   Postal code areas have wide variation in size, especially in rural areas they are quite large, so this may not facilitate the best comparison
 
 ------------------------------------------------------------------------
+## Data Visualization
 
 ### Tree Values
 

@@ -5,7 +5,7 @@ clean_mtl <- function(mtl_raw){
   mtl_sel <- mtl_cols %>% 
     select(c(id, recorded_date, location_latitude, location_longitude, postcode, language, in_which_city_or_municipal_boundary_do_you_live_in,
              starts_with("uf_vals"), starts_with("beliefs"), city_type, housing_code, housing_type_of_dwelling, 
-             canborn, canborn_par, esl, language, language_french_spoken, edu))
+             canborn, esl, language, language_french_spoken, edu_uni, ethnicity))
   
   mtl_code <- mtl_sel %>%
     mutate(
@@ -23,20 +23,34 @@ clean_mtl <- function(mtl_raw){
                                            housing_type_of_dwelling %in% "Other / Autre" == T ~ 4,
                                            housing_type_of_dwelling %in% "Don’t know or Prefer not to answer / Je ne sais pas ou Je préfère ne pas répondre" == T ~ 5),
       
-      immigrant = case_when(canborn %in% 1 & canborn_par %in% 1 ~ 1, # 2nd gen Canadian
-                            canborn %in% 1 & canborn_par %in% 0 ~ 2, # 1st gen Canadian
-                            canborn %in% 0 & canborn_par %in% 0 ~ 3, # 1st gen immigrant
-                            canborn %in% 0 & canborn_par %in% 1 ~ 4 # foreign born Canadian
+      immigrant = case_when(canborn %in% 1 ~ 1, # born in Canada
+                            canborn %in% 0 ~ 2 # immigrant
                             ),
       
       firstlanguage = case_when(esl %in% 1 & language_french_spoken %in% 1 ~ 1, # french first language
                                 esl %in% 0 ~ 2, # english first language
-                                esl %in% 1 & language_french_spoken %in% 0 & language %in% "French" ~ 3, # french second language
-                                esl %in% 1 & language_french_spoken %in% 0 & language %in% "English" ~ 4# english second language
-                                ) 
+                                esl %in% 1 & language_french_spoken %in% 0 ~ 3), # other first language
       
-      # edu: 0 = prefer not to answer, 1 = did not complete high school, 2 = high school, 3 = trade school, 4 = bac, 5 = masters, 6 = doc
+      education = case_when(edu_uni %in% 0 ~ 1, # not university educated
+                            edu_uni %in% 1 ~ 2), # university educated
       
+      ethncode = case_when(ethnicity %in% "White/Blanc" == T & canborn %in% 1 ~ 1, # white Canadian born
+                           ethnicity %in% "White/Blanc" == T & canborn %in% 0 ~ 2, # white immigrant
+                           ethnicity %in% "Arab/Arabe" == T ~ 3,
+                           ethnicity %in% "Black/Noire" == T ~ 4,
+                           ethnicity %in% "Indigenous, Métis, Aboriginal Canadian /Autochtone, Métis" == T ~ 5,
+                           ethnicity %in% "Latin American/Latino-Américain" == T ~ 6,
+                           ethnicity %in% c("South Asian/Sud-Asiatique", "West Asian/Asie occidentale", 
+                                            "Central Asian/Asie centrale", "East Asian/Asie orientale",
+                                            "Southeast Asian/Asie du Sud-Est") == T ~ 7,
+                           ethnicity %in% "Other/Autre" == T ~ 8,
+                           ethnicity %in% c("", "Don’t know or prefer not to answer/Ne sais pas ou préfère ne pas répondre") == T ~ 9,
+                           ethnicity %in% c("White/Blanc", "Arab/Arabe", "Black/Noire", "Indigenous, Métis, Aboriginal Canadian /Autochtone, Métis",
+                                             "Latin American/Latino-Américain", "South Asian/Sud-Asiatique", "West Asian/Asie occidentale",
+                                             "Central Asian/Asie centrale", "East Asian/Asie orientale", "Southeast Asian/Asie du Sud-Est", "Other/Autre",
+                                            "", "Don’t know or prefer not to answer/Ne sais pas ou préfère ne pas répondre") == F ~ 10 # multiple ethnicities
+                           )
+
       )
   
   return(mtl_code)

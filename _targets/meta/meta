@@ -1,12 +1,12 @@
 name|type|data|command|depend|seed|path|time|size|bytes|format|repository|iteration|parent|children|seconds|warnings|error
-.Random.seed|object|6e787fc17a2d11ef|||||||||||||||
+.Random.seed|object|746b44e16330c799|||||||||||||||
 clean_mtl|function|785f903767071fc4|||||||||||||||
 clean_mtl_eng|function|194bfb15417d3c2a|||||||||||||||
 clean_mtl_fre|function|234b73cdb59d6d12|||||||||||||||
 cohesion_mod|stem|f1e867ae7212ce37|c6762f377d0c4d13|69c358f95ad10ffd|-805658098||t19373.8701959631s||153189|qs|local|vector|||0.02||lavaan ERROR some observed variables specified in the model are not found in the dataset social_cohesion_new_1_help_neighbors social_cohesion_new_2_close_knit_neighborhood social_cohesion_new_3_neighborhood_trust social_cohesion_new_4_negative_people_don_t_get_along_reversed social_cohesion_new_5_negative_do_not_share_values_reverse years_neigh years_urban decade gender_f
 make_barplot|function|ca65b2b8a8ce3904|||||||||||||||
 make_boxplot|function|8692199fa28382a6|||||||||||||||
-meeting_report|stem|834cbd38512dea8c|d4f5d6eda5f5c326|9790f7c6a4dcbaf1|-577404127|meeting_report.html*meeting_report.qmd|t19384.7111266458s|e95f38298f8b03ec|6366934|file|local|vector|||35.15||
+meeting_report|stem|f5edbf77453f59d4|d4f5d6eda5f5c326|9790f7c6a4dcbaf1|-577404127|meeting_report.html*meeting_report.qmd|t19384.8081398946s|b1c7fc4f57ee814c|6315836|file|local|vector|||37.87||
 mtl_clean|stem|41353ec9bc71a074|728cbda271df4b5d|c4a2b1a53bab1ec4|870587379||t19384.7015623688s|a651e40335fb3d78|65331|qs|local|vector|||0.17||
 mtl_eng_clean|stem|bcd26395eb46b531|6efc8411502986c3|e0acf738c0cd7d10|1074184863||t19368.8069696458s|05ae09ecf197eccf|102587|qs|local|vector|||0.573||
 mtl_eng_raw|stem|ff295d1f536f1d22|567676048423ced8|94dc8e61a1f12e61|1155880378||t19367.8386893672s|48ff0059130761bf|154068|qs|local|vector|||0.099||
