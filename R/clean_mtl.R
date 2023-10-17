@@ -51,7 +51,14 @@ clean_mtl <- function(mtl_raw){
                                             "", "Don’t know or prefer not to answer/Ne sais pas ou préfère ne pas répondre") == F ~ 10 # multiple ethnicities
                            )
 
-      )
+      ) %>%
+    # recode negative answers so that they are going in the same direction as positive answers 
+    # ie, higher numbers mean more positive feelings toward trees 
+    mutate_at(vars(starts_with(c('beliefs_negative', 'beliefs_extra_negative'))), ~case_when(. == 1 ~ 5,
+                                                                                             . == 2 ~ 4, 
+                                                                                             . == 3 ~ 3,
+                                                                                             . == 4 ~ 2, 
+                                                                                             . == 5 ~ 1))
   
   return(mtl_code)
   
