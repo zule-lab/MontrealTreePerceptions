@@ -4,7 +4,11 @@
     "Repositories": [
       {
         "Name": "CRAN",
-        "URL": "https://cran.rstudio.com"
+        "URL": "https://cloud.r-project.org"
+      },
+      {
+        "Name": "cmdstanr",
+        "URL": "https://mc-stan.org/r-packages"
       }
     ]
   },
@@ -457,6 +461,23 @@
         "utils"
       ],
       "Hash": "89e6d8219950eac806ae0c489052048a"
+    },
+    "cmdstanr": {
+      "Package": "cmdstanr",
+      "Version": "0.6.1",
+      "Source": "Repository",
+      "Repository": "cmdstanr",
+      "Requirements": [
+        "R",
+        "R6",
+        "checkmate",
+        "data.table",
+        "jsonlite",
+        "posterior",
+        "processx",
+        "withr"
+      ],
+      "Hash": "56a08cc593fc5ddc263342209e5d1e14"
     },
     "coda": {
       "Package": "coda",

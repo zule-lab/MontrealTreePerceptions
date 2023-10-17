@@ -1,14 +1,14 @@
 name|type|data|command|depend|seed|path|time|size|bytes|format|repository|iteration|parent|children|seconds|warnings|error
-.Random.seed|object|a705c4d2c250b833|||||||||||||||
-clean_mtl|function|3af619f30680a0aa|||||||||||||||
-init_model|stem||5d7234b59293ad01|cda9a21bd7559d96|1171183580||t19647.8160011963s||0|qs|local|vector|||2.45|Rows containing NAs were excluded from the model.. The global prior student_t3, 0, 2.5 of class Intercept will not be used in the model as all related coefficients have individual priors already. If you did not set those priors yourself, then maybe brms has assigned default priors. See set_prior and get_prior for more details.|1m22m90mconflicted39m 1mupdate22m found in 2 packages.Either pick the one you want with 36m39m 34mrenv39mupdate36m39m 34mlavaan39mupdateOr declare a preference with conflicts_prefer36m39m conflicts_preferrenvupdate36m39m conflicts_preferlavaanupdate
-make_barplot|function|ca65b2b8a8ce3904|||||||||||||||
-make_boxplot|function|8692199fa28382a6|||||||||||||||
+init_model|stem||db443ececc3cf3ca|cda9a21bd7559d96|1171183580||t19647.8160011963s||0|qs|local|vector|||0.53|Rows containing NAs were excluded from the model.. The global prior student_t3, 0, 2.5 of class Intercept will not be used in the model as all related coefficients have individual priors already. If you did not set those priors yourself, then maybe brms has assigned default priors. See set_prior and get_prior for more details.|Please install the cmdstanr package.
 mtl_clean|stem|6ce0f61c6ef62a12|728cbda271df4b5d|8d13c9742a945186|870587379||t19647.8028168659s|fa753804a352a522|71708|qs|local|vector|||0.2||
 mtl_long|stem|c28cce817c28518d|50439a9d29009677|b2a11eec14a1c6fe|-984041239||t19647.8028199349s|d22afb60934041ac|133799|qs|local|vector|||0.2||
 mtl_raw|stem|c7fa11d19eb18584|e9ec0883c3f80ce1|3f1696a208a5f8c5|-2050430421||t19647.8028144316s|14e54a67311d7448|328719|qs|local|vector|||0.11||
 mtl_raw_file|stem|538f073b9f7edaeb|ea738f1a37788f4d|ef46db3751d8e999|1513051185|input/survey/Montreal_cleaned.csv|t19373.810122391s|fb33041fc13c0e92|1520134|file|local|vector|||0||
+make_boxplot|function|8692199fa28382a6|||||||||||||||
+.Random.seed|object|3e87937a4214832c|||||||||||||||
+clean_mtl|function|3af619f30680a0aa|||||||||||||||
+make_barplot|function|ca65b2b8a8ce3904|||||||||||||||
 make_boxplot|function|8692199fa28382a6
-.Random.seed|object|63bf5324a494c6d5
+.Random.seed|object|3fc957e0f5758b6e
 clean_mtl|function|3af619f30680a0aa
 make_barplot|function|ca65b2b8a8ce3904

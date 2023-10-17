@@ -62,7 +62,8 @@ c(
                   prior(normal(0.5, 0.4),   class = "Intercept", coef = "4"),
                   prior(exponential(4), class = "sd")),
         cores = getOption("mc.cores", 8),
-        chains = 4)
+        chains = 4,
+        backend = 'cmdstanr')
     )
   
 
