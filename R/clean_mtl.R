@@ -60,6 +60,22 @@ clean_mtl <- function(mtl_raw){
                                                                                              . == 4 ~ 2, 
                                                                                              . == 5 ~ 1))
   
+  mtl_factors <- mtl_code %>%
+    mutate(id = as.factor(id),
+           city_type = as.factor(city_type),
+           housing_code = as.factor(housing_code),
+           housing_type_of_dwelling = as.factor(housing_type_of_dwelling),
+           canborn = as.factor(canborn),
+           esl = as.factor(esl),
+           language_french_spoken = as.factor(language_french_spoken),
+           edu_uni = as.factor(edu_uni), 
+           ethnicity = as.factor(ethnicity),
+           immigrant = as.factor(immigrant),
+           firstlanguage = as.factor(firstlanguage),
+           education = as.factor(education),
+           ethncode = as.factor(ethncode))
+    
+  
   return(mtl_code)
   
   
