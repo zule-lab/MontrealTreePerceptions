@@ -4,15 +4,21 @@ library(qs)
 library(renv)
 library(conflicted)
 conflict_prefer_all("dplyr", "stats", quiet = T)
+conflict_prefer_all("dplyr", "base", quiet = T)
+conflict_prefer_all("renv", "base", quiet = T)
+conflict_prefer_all("renv", "stats", quiet = T)
+conflict_prefer_all("renv", "utils", quiet = T)
+conflict_prefer_all("stats", "janitor", quiet = T)
 
 library(janitor)
 library(dplyr)
 library(tidyr)
 
-library(lavaan)
 library(brms)
+conflicts_prefer(brms::ar)
 
 library(rmarkdown)
+conflicts_prefer(rmarkdown::run)
 library(quarto)
 
 library(ggpubr)
