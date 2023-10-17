@@ -35,6 +35,36 @@ c(
     clean_mtl(mtl_raw)
   ),
   
+  # make long for initial model
+  tar_target(
+    mtl_long,
+    mtl_clean %>%
+      pivot_longer(cols = starts_with(c('uf_vals', 'beliefs'))) %>%
+      mutate(question = name,
+             score = value,
+             question_category = case_when(startsWith(question, 'uf_vals') ~ 'values',
+                                           startsWith(question, 'beliefs_negative') ~ 'negative_beliefs',
+                                           startsWith(question, 'beliefs_extra_negative') ~ 'extra_negative_beliefs',
+                                           startsWith(question, 'beliefs_positive') ~ 'positive_beliefs',
+                                           startsWith(question, 'beliefs_extra_positive') ~ 'extra_positive_beliefs'))
+    
+  ),
+  
+  # explore variance using random effects model 
+  tar_target(
+    init_model,
+    brm(bf(score ~ 1 + (1|id) + (1|question) + (1|question_category)),
+        data = mtl_long,
+        family = cumulative(), 
+        prior = c(prior(normal(-2.5, 0.4),  class = "Intercept", coef = "1"),
+                  prior(normal(-1.5, 0.4),  class = "Intercept", coef = "2"),
+                  prior(normal(-0.5, 0.2),   class = "Intercept", coef = "3"),
+                  prior(normal(0.5, 0.4),   class = "Intercept", coef = "4"),
+                  prior(exponential(4), class = "sd")),
+        cores = getOption("mc.cores", 8),
+        chains = 4)
+    )
+  
 
   
 )
