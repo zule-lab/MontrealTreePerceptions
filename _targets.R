@@ -24,6 +24,13 @@ restore()
 
 # Targets -----------------------------------------------------------------
 c(
+  
+  # DAG,
+  tar_target(
+    dag,
+    create_dag()
+  ),
+  
   # load survey data
   tar_file_read(mtl_raw,
            "input/survey/Montreal_cleaned.csv", # raw survey data from Qualtrics cleaned by Camilo & Kuan
