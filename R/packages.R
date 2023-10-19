@@ -15,6 +15,7 @@ library(dplyr)
 library(tidyr)
 
 library(brms)
+library(tidybayes)
 library(cmdstanr)
 conflicts_prefer(brms::ar)
 
