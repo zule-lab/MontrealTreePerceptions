@@ -60,20 +60,6 @@ c(
   # explore variance using random effects model 
   # note: models are misspecified 
   # TODO: add zarg
-  tar_target(
-    init_model,
-    brm(bf(score ~ 1 + (1|id) + (1|question) + (1|question_category)),
-        data = mtl_long,
-        family = cumulative(), 
-        prior = c(prior(normal(-2.5, 0.4),  class = "Intercept", coef = "1"),
-                  prior(normal(-1.5, 0.4),  class = "Intercept", coef = "2"),
-                  prior(normal(-0.5, 0.2),   class = "Intercept", coef = "3"),
-                  prior(normal(0.5, 0.4),   class = "Intercept", coef = "4"),
-                  prior(exponential(4), class = "sd")),
-        cores = getOption("mc.cores", 8),
-        chains = 4,
-        backend = 'rstan')
-    ),
   
   tar_target(
     init_model_prior,
