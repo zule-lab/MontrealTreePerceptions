@@ -41,3 +41,6 @@ vignettes/*.pdf
 # confidential data
 /input/survey/
 .directory
+
+# targets
+*_targets/
