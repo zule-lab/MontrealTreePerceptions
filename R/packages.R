@@ -13,6 +13,7 @@ conflict_prefer_all("stats", "janitor", quiet = T)
 library(janitor)
 library(dplyr)
 library(tidyr)
+library(stringr)
 
 library(brms)
 library(tidybayes)
