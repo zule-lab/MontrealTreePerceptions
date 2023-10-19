@@ -18,14 +18,13 @@ create_dag <- function(){
       "dwelling" = "Dwelling Type",
       "immigration" = "Immigration\n Status"),
     exposure = 'language',
-    outcome = 'values',
+    outcome = 'values') %>% 
     #coords = list(x = c(cooling = 0, tree_density = -1, tree_size = 0, tree_diversity = 1, age = 1, soil = 0, past_land_use = 0),
     #              y = c(cooling = 3, tree_density = 2, tree_size = 2, tree_diversity = 2, age = 1, soil = 1, past_land_use = 0))) %>%
     tidy_dagitty() %>%
     mutate(status = case_when(name == "values" ~ 'outcome',
                               name == "language" ~ 'exposure',
                               .default = 'NA'))
-  )
   
   i <- ggplot(dagified, aes(x = x, y = y, xend = xend, yend = yend)) +
     theme_dag() + 
