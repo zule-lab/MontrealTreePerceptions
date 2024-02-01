@@ -59,6 +59,7 @@ clean_mtl <- function(mtl_raw){
                                                                                              . == 3 ~ 3,
                                                                                              . == 4 ~ 2, 
                                                                                              . == 5 ~ 1))
+  # TODO add age
   
   mtl_factors <- mtl_code %>%
     mutate(id = as.factor(id),

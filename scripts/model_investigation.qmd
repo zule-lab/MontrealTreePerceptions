@@ -1,0 +1,81 @@
+---
+title: "Initial Model Investigation"
+author: "Isabella C. Richmond"
+format: html
+---
+
+```{r, include = FALSE}
+source('R/packages.R')
+```
+
+# Causality 
+
+First, let's investigate the DAG (it's a mess)
+
+![](graphics/dag.png)
+
+# Before Modelling 
+
+Before trying to model that, build a model that investigates where the variation in the data is, by adding responder id, question, and question category to an intercept only model as random effects. 
+
+First, let's look at the prior only model:
+
+```{r}
+p_model <- tar_read(init_model_prior)
+
+# model formula
+p_model$formula
+
+# priors
+prior_summary(p_model)
+
+# check diagnostics
+plot(p_model)
+
+```
+
+
+Now, let's look at the model with the data: 
+
+```{r}
+d_model <- tar_read(init_model_cmdstanr)
+
+
+# model formula
+d_model$formula
+
+# priors
+prior_summary(d_model)
+
+# check diagnostics
+plot(d_model)
+
+d_model %>% 
+  spread_draws(r_question_category[question_category, term]) %>% 
+  ggplot(aes(x = r_question_category, y = question_category)) +
+  stat_halfeye()
+
+# look at variation in question
+draws_questions <- d_model %>% 
+  spread_draws(r_question[question, term]) %>% 
+  mutate(question_cat = case_when(str_detect(question, 'uf_vals') ~ 'value',
+                                  str_detect(question, 'beliefs_positive') ~ 'beliefs_positive',
+                                  str_detect(question, 'beliefs_negative') ~ 'beliefs_negative',
+                                  str_detect(question, 'beliefs_extra_positive') ~ 'beliefs_positive', 
+                                  str_detect(question, 'beliefs_extra_negative') ~ 'beliefs_negative'))
+
+draws_questions %>% 
+  filter(question_cat == 'value') %>%
+  ggplot(aes(x = r_question, y = question)) +
+  stat_halfeye()
+
+draws_questions %>% 
+  filter(question_cat == 'beliefs_positive') %>% 
+  ggplot(aes(x = r_question, y = question)) +
+  stat_halfeye()
+
+draws_questions %>% 
+  filter(question_cat == 'beliefs_negative') %>% 
+  ggplot(aes(x = r_question, y = question)) +
+  stat_halfeye()
+```
