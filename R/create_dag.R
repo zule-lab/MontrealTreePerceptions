@@ -3,12 +3,12 @@ create_dag <- function(){
   
   dagified <- dagify(
     values ~ age + city_type + education + dwelling + language + immigration + ethnicity + socioeconomic,
-    education ~ age + socioeconomic,
-    city_type ~ ethnicity + age + immigration + socioeconomic,
+    education ~ age,
+    city_type ~ ethnicity + age + immigration + socioeconomic + language,
     ethnicity ~ immigration,
-    language ~ city_type + ethnicity + immigration,
+    language ~ ethnicity + immigration,
     dwelling ~ ethnicity + immigration + socioeconomic + city_type,
-    socioeconomic ~ immigration + ethnicity + language + age + education,
+    socioeconomic ~ immigration + ethnicity + age + education,
     labels = c(
       "values" = "Tree Values\n & Beliefs",
       "age" = "Age",
