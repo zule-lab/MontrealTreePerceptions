@@ -316,7 +316,7 @@
     },
     "brms": {
       "Package": "brms",
-      "Version": "2.21.0",
+      "Version": "2.22.0",
       "Source": "Repository",
       "Repository": "CRAN",
       "Requirements": [
@@ -347,7 +347,7 @@
         "stats",
         "utils"
       ],
-      "Hash": "5997b296ee665c10f0d18f1d01c9dd5c"
+      "Hash": "12f0136fdf0a8c5f0e65cc7cef84dfe5"
     },
     "broom": {
       "Package": "broom",
@@ -2298,6 +2298,23 @@
       "Source": "Repository",
       "Repository": "CRAN",
       "Hash": "51dab85c6c98e50a18d7551e9d49f76c"
+    },
+    "zarg": {
+      "Package": "zarg",
+      "Version": "0.0.1.9000",
+      "Source": "GitHub",
+      "RemoteType": "github",
+      "RemoteHost": "api.github.com",
+      "RemoteRepo": "zarg",
+      "RemoteUsername": "robitalec",
+      "RemoteRef": "HEAD",
+      "RemoteSha": "0b88911a4798535aadd0fa91291ad257744aaef1",
+      "Requirements": [
+        "brms",
+        "qs",
+        "targets"
+      ],
+      "Hash": "eb32ba1eae917360f00ad9b236659a89"
     }
   }
 }
