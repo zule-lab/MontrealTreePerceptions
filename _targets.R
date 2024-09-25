@@ -9,7 +9,7 @@ tar_source('R')
 # Options -----------------------------------------------------------------
 # Targets
 tar_option_set(format = 'qs')
-
+options(timeout=100)
 
 
 # Renv --------------------------------------------------------------------
@@ -61,19 +61,20 @@ c(
   # - we want a plausible range that is close to real data 
   
   zar_brms(
-    init_model_prior,
-    bf(score ~ 1 + (1|id) + (1|question) + (1|question_category)),
-    data = mtl_long,
+    language_de,
+    bf(score ~ 1 + firstlanguage + housing_type_of_dwelling + ethncode + (1|id) + (1|question)),
     family = cumulative(),
-    prior = c(prior(normal(-2.5, 0.4), class = "Intercept", coef = "1"),
-             prior(normal(-1.5, 0.4),  class = "Intercept", coef = "2"),
-             prior(normal(-0.5, 0.2),   class = "Intercept", coef = "3"),
-             prior(normal(0.5, 0.4),   class = "Intercept", coef = "4"),
-             prior(exponential(4), class = "sd")),
-    sample_prior = "only",
-    cores = getOption("mc.cores", 8),
+    prior = c(prior(normal(0, 0.5), class = "b"),
+              prior(normal(-2.5, 0.4), class = "Intercept", coef = "1"),
+              prior(normal(-1.5, 0.4),  class = "Intercept", coef = "2"),
+              prior(normal(-0.5, 0.2),   class = "Intercept", coef = "3"),
+              prior(normal(0.5, 0.4),   class = "Intercept", coef = "4"),
+              prior(exponential(1), class = "sd")),
+    backend = 'cmdstanr',
+    data = mtl_long,
     chains = 4,
-    backend = 'cmdstanr'
+    iter = 1000,
+    cores = 4
     )
 
   

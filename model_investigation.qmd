@@ -1,40 +1,82 @@
 ---
-title: "Initial Model Investigation"
-author: "Isabella C. Richmond"
+title: "Supplementary Information - Paper Title"
 format: html
 ---
 
+Authors: Isabella C. Richmond^1^\*, Thi Thanh Hiên Pham^2^, Emile Tchinda^2^, Carly D. Ziter^1^
+
+1 Department of Biology, Concordia University, Montreal Canada, H4B 1R6
+
+2 Département d'études urbaines et touristiques, Université du Québec à Montréal, Montreal Canada,
+
+\* isabella.richmond\@mail.concordia.ca
+
+
+
 ```{r, include = FALSE}
 source('R/packages.R')
+
+tar_load(language_de_brms_sample_prior)
+
+
+plot_prior <- function(mod, xmin, xmax, ylab){
+  
+  # how to sequence data
+  seq_d <- seq(xmin, xmax, by = 0.5)
+  
+  # pull variables from model 
+  vars <- colnames(mod$data)[-1]
+  
+  # identify categorical variables 
+  factors <- names(Filter(is.factor,mod$data[-1]))
+  
+  # identify numeric variables 
+  numeric <- names(Filter(is.numeric,mod$data[-1]))
+  
+  figlist <- lapply(numeric, function(x){
+    
+    df <- data.frame(matrix(ncol=length(vars),nrow=0, dimnames=list(NULL, vars)))
+    
+    df %<>%
+      summarise_at(x, ~seq_d) %>%
+      bind_rows(df, .) %>%
+      mutate(across(all_of(factors), as.factor)) %>% 
+      mutate(across(all_of(numeric), ~ replace(., is.na(.), 0)))
+    
+    epred <- add_epred_draws(df, mod)
+    
+    ggplot(epred, aes(x = get(x), y = .epred)) +
+      geom_line(aes(group = .draw), alpha = 0.1) +
+      labs(y = ylab, x = x) +
+      theme_classic()
+    
+  })
+}
 ```
 
 # Causality 
 
-First, let's investigate the DAG (it's a mess)
+First, let's investigate the DAG. Based on our assumptions, to test the direct effect of language on tree values and beliefs, we need to include ethnicity and city type in our model.
 
 ![](graphics/dag.png)
 
-# Before Modelling 
+# Prior predictive simulation
 
-Before trying to model that, build a model that investigates where the variation in the data is, by adding responder id, question, and question category to an intercept only model as random effects. 
+Prior predictive checks are used to ensure that the values selected for priors for our models allow a  reasonable range of values. For numeric predictor variables, we simulate predictive draws for prior only models and visualize the slope/intercept of the values. We then do a "posterior predictive check" but with the prior only model, to see if the data is captured in the priors. Note that all data is scaled and centered in these data.
 
-First, let's look at the prior only model:
 
 ```{r}
-p_model <- tar_read(init_model_prior)
 
-# model formula
-p_model$formula
 
-# priors
-prior_summary(p_model)
-
-# check diagnostics
-plot(p_model)
 
 ```
 
 
+## Model diagnostics
+
+
+
+## Old 
 Now, let's look at the model with the data: 
 
 ```{r}
@@ -79,3 +121,5 @@ draws_questions %>%
   ggplot(aes(x = r_question, y = question)) +
   stat_halfeye()
 ```
+
+
