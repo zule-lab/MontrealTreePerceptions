@@ -22,7 +22,7 @@ create_dag <- function(){
     outcome = 'values',
     latent = 'income',
     coords = list(x = c(age = -0.5, values = 0, education_level = 0, income = 0.5, daily_exposure = 1.75, ethnicity = 1.5, language = 1, dwelling_type = 2, city_type = 2),
-                  y = c(age = 0, values = 1, education_level = -1, income = -1, daily_exposure = -0.5, ethnicity = 0, language = 1.25, dwelling_type = -1, city_type = 0.25))) %>% 
+                  y = c(age = 0, values = 1, education_level = -1, income = -1, daily_exposure = -0.5, ethnicity = 0, language = 1, dwelling_type = -1, city_type = 0.25))) %>% 
     tidy_dagitty() %>%
     mutate(status = case_when(name == "values" ~ 'outcome',
                               name == "language" ~ 'exposure',
