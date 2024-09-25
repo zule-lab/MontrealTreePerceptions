@@ -2,31 +2,32 @@ create_dag <- function(){
   
   
   dagified <- dagify(
-    values ~ age + city_type + education + dwelling + language + immigration + ethnicity + socioeconomic,
-    education ~ age,
-    city_type ~ ethnicity + age + immigration + socioeconomic + language,
-    ethnicity ~ immigration,
-    language ~ ethnicity + immigration,
-    dwelling ~ ethnicity + immigration + socioeconomic + city_type,
-    socioeconomic ~ immigration + ethnicity + age + education,
+    values ~ age + education_level + income + daily_exposure + dwelling_type + ethnicity + city_type + language,
+    education_level ~ age,
+    income ~ education_level + ethnicity, 
+    language ~ ethnicity + city_type,
+    daily_exposure ~ income + dwelling_type + city_type,
+    dwelling_type ~ city_type + income,
     labels = c(
       "values" = "Tree Values\n & Beliefs",
       "age" = "Age",
-      "education" = "Education",
+      "education_level" = "Education",
+      "daily_exposure" = "Daily Exposure\n to Nature",
       "city_type" = "City\n Type",
       "ethnicity" = "Ethnicity",
       "language" = "Language\n Spoken",
-      "dwelling" = "Dwelling Type",
-      "immigration" = "Immigration\n Status",
-      "socioeconomic" = "Socioeconomic\n Status"),
+      "dwelling_type" = "Dwelling Type",
+      "income" = "Income"),
     exposure = 'language',
     outcome = 'values',
-    latent = 'socioeconomic') %>% 
-    #coords = list(x = c(cooling = 0, tree_density = -1, tree_size = 0, tree_diversity = 1, age = 1, soil = 0, past_land_use = 0),
-    #              y = c(cooling = 3, tree_density = 2, tree_size = 2, tree_diversity = 2, age = 1, soil = 1, past_land_use = 0))) %>%
+    latent = 'income',
+    coords = list(x = c(age = -0.5, values = 0, education_level = 0, income = 0.5, daily_exposure = 1.75, ethnicity = 1.5, language = 1, dwelling_type = 2, city_type = 2),
+                  y = c(age = 0, values = 1, education_level = -1, income = -1, daily_exposure = -0.5, ethnicity = 0, language = 1.25, dwelling_type = -1, city_type = 0.25))) %>% 
     tidy_dagitty() %>%
     mutate(status = case_when(name == "values" ~ 'outcome',
                               name == "language" ~ 'exposure',
+                              name == "ethnicity" ~ 'exposure',
+                              name == "city_type" ~ 'exposure',
                               name == "socioeconomic" ~ "latent",
                               .default = 'NA'))
   
@@ -36,8 +37,8 @@ create_dag <- function(){
     geom_dag_label_repel(aes(label = label, fill = status),
                          color = "white", fontface = "bold") +
     geom_dag_edges() + 
-    scale_fill_manual(values = c('darkseagreen','goldenrod3', 'grey', 'lightskyblue')) + 
-    scale_colour_manual(values = c('darkseagreen', 'goldenrod3', 'grey', 'lightskyblue')) + 
+    scale_fill_manual(values = c('darkseagreen','grey', 'lightskyblue', 'goldenrod3')) + 
+    scale_colour_manual(values = c('darkseagreen','grey', 'lightskyblue', 'goldenrod3')) + 
     theme(legend.position = 'none')
   
   ggsave('graphics/dag.png', plot = i, width = 10, height = 8, units = "in")
