@@ -1,18 +1,4 @@
 # === Targets -------------------------------------------------------------
-# Framework by Alec L. Robitaille & Isabella Richmond
-
-# MEETING W AM
-# TODO
-# change sampler starting values w init to try and help convergence
-# use 1000 iterations w 8 chains 
-# take out question_category, can calculate post hoc if needed 
-# use subset of data and test w that 
-# change exponential prior to normal(0, 0,2)
-# do predictions with prior only model - is the variation in question and individual representative of the dataset
-# - we want a plausible range that is close to real data 
-# make homogenous subset of data in different ways and see if that is creating the biomodal dist 
-# bottom line: find out if problem is the model or the data
-# adjustment for direct effect of language includes city type, ethnicity, immigration
 
 # Source ------------------------------------------------------------------
 library(targets)
@@ -71,6 +57,9 @@ c(
   # explore variance using random effects model 
   # note: models are misspecified 
   # TODO: add zarg
+  # change exponential prior to normal(0, 0,2)
+  # do predictions with prior only model - is the variation in question and individual representative of the dataset
+  # - we want a plausible range that is close to real data 
   
   tar_target(
     init_model_prior,
