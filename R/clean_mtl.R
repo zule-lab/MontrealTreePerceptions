@@ -5,7 +5,7 @@ clean_mtl <- function(mtl_raw){
   mtl_sel <- mtl_cols %>% 
     select(c(id, recorded_date, location_latitude, location_longitude, postcode, language, in_which_city_or_municipal_boundary_do_you_live_in,
              starts_with("uf_vals"), starts_with("beliefs"), city_type, housing_code, housing_type_of_dwelling, 
-             canborn, esl, language, language_french_spoken, edu_uni, ethnicity))
+             canborn, esl, language, language_french_spoken, edu_uni, ethnicity, decade_num))
   
   mtl_code <- mtl_sel %>%
     mutate(
@@ -59,7 +59,6 @@ clean_mtl <- function(mtl_raw){
                                                                                              . == 3 ~ 3,
                                                                                              . == 4 ~ 2, 
                                                                                              . == 5 ~ 1))
-  # TODO add age
   
   mtl_factors <- mtl_code %>%
     mutate(id = as.factor(id),
@@ -74,7 +73,8 @@ clean_mtl <- function(mtl_raw){
            immigrant = as.factor(immigrant),
            firstlanguage = as.factor(firstlanguage),
            education = as.factor(education),
-           ethncode = as.factor(ethncode))
+           ethncode = as.factor(ethncode),
+           decade_num = as.factor(decade_num))
     
   
   return(mtl_code)
