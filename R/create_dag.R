@@ -4,10 +4,11 @@ create_dag <- function(){
   dagified <- dagify(
     values ~ age + education_level + income + daily_exposure + dwelling_type + ethnicity + city_type + language,
     education_level ~ age,
-    income ~ education_level + ethnicity, 
+    income ~ education_level + ethnicity + age, 
     language ~ ethnicity + city_type,
     daily_exposure ~ income + dwelling_type + city_type,
-    dwelling_type ~ city_type + income,
+    dwelling_type ~ city_type + income + age,
+    city_type ~ ethnicity + language + age,
     labels = c(
       "values" = "Tree Values\n & Beliefs",
       "age" = "Age",
@@ -26,8 +27,9 @@ create_dag <- function(){
     tidy_dagitty() %>%
     mutate(status = case_when(name == "values" ~ 'outcome',
                               name == "language" ~ 'exposure',
-                              name == "ethnicity" ~ 'exposure',
-                              name == "city_type" ~ 'exposure',
+                              name == "ethnicity" ~ 'adjustment',
+                              name == "city_type" ~ 'adjustment',
+                              name == "age" ~ 'adjustment',
                               name == "socioeconomic" ~ "latent",
                               .default = 'NA'))
   
@@ -37,8 +39,8 @@ create_dag <- function(){
     geom_dag_label_repel(aes(label = label, fill = status),
                          color = "white", fontface = "bold") +
     geom_dag_edges() + 
-    scale_fill_manual(values = c('darkseagreen','grey', 'lightskyblue', 'goldenrod3')) + 
-    scale_colour_manual(values = c('darkseagreen','grey', 'lightskyblue', 'goldenrod3')) + 
+    scale_fill_manual(values = c('goldenrod3', 'darkseagreen','grey', 'lightskyblue' )) + 
+    scale_colour_manual(values = c('goldenrod3', 'darkseagreen','grey', 'lightskyblue' )) + 
     theme(legend.position = 'none')
   
   ggsave('graphics/dag.png', plot = i, width = 10, height = 8, units = "in")
