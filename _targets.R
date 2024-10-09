@@ -62,7 +62,7 @@ c(
   
   zar_brms(
     language_de,
-    bf(score ~ 1 + firstlanguage + housing_type_of_dwelling + ethncode + (1|id) + (1|question)),
+    bf(score ~ 1 + firstlanguage + city_type + ethncode + decade_num + (1|id) + (1|question)),
     family = cumulative(),
     prior = c(prior(normal(0, 0.5), class = "b"),
               prior(normal(-2.5, 0.4), class = "Intercept", coef = "1"),
