@@ -4,7 +4,8 @@ clean_mtl <- function(mtl_raw){
   
   mtl_sel <- mtl_cols %>% 
     select(c(id, recorded_date, location_latitude, location_longitude, postcode, language, in_which_city_or_municipal_boundary_do_you_live_in,
-             starts_with("uf_vals"), starts_with("beliefs"), city_type, housing_code, housing_type_of_dwelling, 
+             starts_with("uf_vals"), starts_with("beliefs"), starts_with("tree_satisfaction"), 
+             city_type, housing_code, housing_type_of_dwelling, 
              canborn, esl, language, language_french_spoken, edu_uni, ethnicity, decade_num))
   
   mtl_code <- mtl_sel %>%
